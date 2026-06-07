@@ -95,6 +95,11 @@
 				<command>~/nixos/scripts/battery-notify.sh</command>
 			</action>
 		</keybind>
+		<keybind key="W-t">
+			<action name="Execute">
+				<command>~/nixos/scripts/datetime-notify.sh</command>
+			</action>
+		</keybind>
 	</keyboard>
 	<mouse>
 		<context name="Titlebar">

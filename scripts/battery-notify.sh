@@ -6,12 +6,14 @@ if [ ! -d "$bat_path" ]; then
 fi
 
 battery=$(cat "$bat_path/capacity")
-status=$(cat "bat_path/status")
+status=$(cat "$bat_path/status")
 
-if [ "$status" = "Full" ] || [ -z "$status" ]; then
-	msg="$battery% - Full"
-else
-	msg="$battery% - $status"
+if [ "$status" = "Charging" ]; then
+	msg="$battery% - Charging"
+elif [ "$status" = "Discharging" ]; then
+	msg="$battery% - Discharging"
+else 
+	msg="$battery%"
 fi
 
 notify-send -u low "Battery: $msg" --expire-time=3000

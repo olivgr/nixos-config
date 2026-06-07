@@ -35,6 +35,7 @@
 		enable = true;
 		settings = {
 			font.size = 12.0;
+			window.opacity = 0.9;
 
 			keyboard.bindings = [
 				{ key = "Plus";			mods = "Control|Shift";	action = "IncreaseFontSize"; }
@@ -75,6 +76,7 @@
 		settings = {
 			global = {
 				font = "monospace 16";
+				width = 400; # max width in pixels
 			};
 		};
 	};
