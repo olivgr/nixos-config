@@ -56,6 +56,7 @@
 		reaper
 		xev
 		fzf
+		pipewire.jack
 		(pkgs.writeShellApplication
 		{
 			name = "ns";
