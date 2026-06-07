@@ -34,7 +34,7 @@
 	programs.alacritty = {
 		enable = true;
 		settings = {
-			font.size = 12.0;
+			font.size = 11.0;
 			window.opacity = 0.9;
 
 			keyboard.bindings = [
