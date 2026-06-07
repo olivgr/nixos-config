@@ -50,7 +50,19 @@
 		  }
 		  ];
 	  };
-		  
+	  extraConfig.wireplumber."51-uln8" = {
+		  monitor.alsa.rules = [
+		  {
+			matches = [
+				{ "node.name" = "~alsa.*ULN8.*"; }
+			];
+			actions.update-props = {
+				"audio.rate" = 44100;
+				"audio.allowed-rates" = "44100";
+			};
+		  }
+		  ];
+	  };
   };
 
   networking.hostName = "mynixos"; # Define your hostname.
