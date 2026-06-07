@@ -26,43 +26,19 @@
 	  jack.enable = true;
 	  pulse.enable = true;
 
-	  extraConfig.pipewire."92-low-latency" = {
-		  context.properties = {
-			  default.clock.rate = 44100;
-			  default.clock.allowed-rates = [ 44100 ];
-			  default.clock.quantum = 64;
-			  default.clock.min-quantum = 64;
-			  default.clock.max-quantum = 512;
+	  wireplumber.extraConfig = {
+		  "10-default-volume" = {
+			  "wireplumber.settings"."device.routes.default-sink-volume" = 0.99;
 		  };
 	  };
-	  extraConfig.pipewire."93-uln8" = {
-		  monitor.alsa.rules = [
-		  {
-			matches = [
-				{ "node.name" = "~alsa.*ULN8.*"; }
-			];
-			actions.update-props = {
-				"audio.rate" = 44100;
-				"audio.allowed-rates" = "44100";
-				"api.alsa.period-size" = 64;
-				"api.alsa.headroom" = 0;
-			};
-		  }
-		  ];
-	  };
-	  wireplumber.enable = true;
-	  wireplumber.extraConfig."51-uln8" = {
-		  monitor.alsa.rules = [
-		  {
-			matches = [
-				{ "node.name" = "~alsa.*ULN8.*"; }
-			];
-			actions.update-props = {
-				"audio.rate" = 44100;
-				"audio.allowed-rates" = "44100";
-			};
-		  }
-		  ];
+	  extraConfig.pipewire."92-low-latency" = {
+		  "context.properties" = {
+			  "default.clock.rate" = 44100;
+			  "default.clock.allowed-rates" = [ 44100 ];
+			  "default.clock.quantum" = 128;
+			  "default.clock.min-quantum" = 128;
+			  "default.clock.max-quantum" = 512;
+		  };
 	  };
   };
 
