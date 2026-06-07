@@ -56,6 +56,8 @@
 		reaper
 		xev
 		fzf
+		libnotify
+		dunst
 		pipewire.jack
 		(pkgs.writeShellApplication
 		{
@@ -67,4 +69,6 @@
 			text = builtins.readFile "${pkgs.nix-search-tv.src}/nixpkgs.sh";
 		})
 	];
+
+	services.dunst.enable = true;
 }
