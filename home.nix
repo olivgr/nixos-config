@@ -41,6 +41,7 @@
 		feh
 		reaper
 		xev
+		fzf
 		(pkgs.writeShellApplication
 		{
 			name = "ns";
