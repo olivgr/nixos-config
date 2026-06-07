@@ -55,6 +55,7 @@
 		picom
 		feh
 		reaper
+		vlc
 		xev
 		fzf
 		libnotify
