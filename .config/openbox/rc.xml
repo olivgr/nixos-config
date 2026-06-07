@@ -97,6 +97,11 @@
 		</keybind>
 		<keybind key="W-t">
 			<action name="Execute">
+				<command>~/nixos/scripts/time-notify.sh</command>
+			</action>
+		</keybind>
+		<keybind key="W-d">
+			<action name="Execute">
 				<command>~/nixos/scripts/datetime-notify.sh</command>
 			</action>
 		</keybind>
