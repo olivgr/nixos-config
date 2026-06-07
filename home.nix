@@ -27,12 +27,23 @@
 			export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
 		'';
 	};
-	
+
+	programs.alacritty = {
+		enable = true;
+		settings = {
+			font.size = 12.0;
+
+			keyboard.bindings = [
+				{ key = "Plus";		mods = "Control";	action = "IncreaseFontSize"; }
+				{ key = "Minus";	mods = "Control";	action = "DecreaseFontSize"; }
+				{ key = "Key0";		mods = "Control";	action = "ResetFontSize"; }
+			];	
+		};
+	};
 
 	home.packages = with pkgs; [
 		fastfetch
 		btop
-		alacritty
 		wine64
 		xinit
 		brightnessctl
