@@ -50,7 +50,8 @@
 		  }
 		  ];
 	  };
-	  extraConfig.wireplumber."51-uln8" = {
+	  wireplumber.enable = true;
+	  wireplumber.extraConfig."51-uln8" = {
 		  monitor.alsa.rules = [
 		  {
 			matches = [
