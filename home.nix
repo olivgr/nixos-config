@@ -70,5 +70,12 @@
 		})
 	];
 
-	services.dunst.enable = true;
+	services.dunst = {
+		enable = true;
+		settings = {
+			global = {
+				font = "monospace 16";
+			};
+		};
+	};
 }

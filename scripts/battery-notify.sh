@@ -7,4 +7,11 @@ fi
 
 battery=$(cat "$bat_path/capacity")
 status=$(cat "bat_path/status")
-notify-send "Battery" "$battery% - $status" --expire-time=3000
+
+if [ "$status" = "Full" ] || [ -z "$status" ]; then
+	msg="$battery% - Full"
+else
+	msg="$battery% - $status"
+fi
+
+notify-send -u low "Battery: $msg" --expire-time=3000
