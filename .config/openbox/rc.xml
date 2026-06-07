@@ -29,7 +29,7 @@
 		</keybind>
 		<keybind key="W-r">
 			<action name="Execute">
-				<command>reaper</command>
+				<command>pw-jack reaper</command>
 			</action>
 		</keybind>
 		<keybind key="F10">
