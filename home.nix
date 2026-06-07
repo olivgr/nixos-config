@@ -5,6 +5,9 @@
 	home.homeDirectory = "/home/oliver";
 	home.stateVersion = "26.05";
 
+	home.file.".config/openbox/rc.xml".source = ./config/openbox/rc.xml;
+	home.file.".config/openbox/autostart".source = ./config/openbox/autostart;
+
 	programs.git = {
 		enable = true;
 		settings = {

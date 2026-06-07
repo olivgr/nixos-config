@@ -1,0 +1,4 @@
+picom --config ~/.config/picom/picom.conf &
+feh --bg-fill ~/Pictures/wallpaper/ramen.png
+redshift -l 35.6895:139.6917 -t 6000:4000 -b 1.0:0.7 &
+alacritty &

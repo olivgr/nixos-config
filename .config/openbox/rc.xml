@@ -1,0 +1,133 @@
+<openbox_config>
+	<desktops>
+		<number>4</number>
+		<firstdesk>1</firstdesk>
+		<names>
+			<name>1</name>
+			<name>2</name>
+			<name>3</name>
+			<name>4</name>
+		</names>
+		<popupTime>875</popupTime>
+	</desktops>
+	<keyboard>
+		<numlock>yes</numlock>
+		<keybind key="W-Return">
+			<action name="Execute">
+				<command>alacritty</command>
+			</action>
+		</keybind>
+		<keybind key="W-S-Return">
+			<action name="Execute">
+				<command>firefox</command>
+			</action>
+		</keybind>
+		<keybind key="W-e">
+			<action name="Execute">
+				<command>thunar</command>
+			</action>
+		</keybind>
+		<keybind key="W-r">
+			<action name="Execute">
+				<command>reaper</command>
+			</action>
+		</keybind>
+		<keybind key="F10">
+			<action name="ToggleMaximize"/>
+		</keybind>
+		<keybind key="F11">
+			<action name="ToggleFullscreen"/>
+		</keybind>
+		<keybind key="XF86MonBrightnessUp">
+			<action name="Execute">
+				<command>brightnessctl set +10%</command>
+			</action>
+		</keybind>
+		<keybind key="XF86MonBrightnessDown">
+			<action name="Execute">
+				<command>brightnessctl set 10%-</command>
+			</action>
+		</keybind>
+		<keybind key="W-h">
+			<action name="UnmaximizeFull"/>
+			<action name="MoveResizeTo">
+				<x>0</x>
+				<y>0</y>
+				<height>100%</height>
+				<width>50%</width>
+			</action>
+		</keybind>
+		<keybind key="W-l">
+			<action name="UnmaximizeFull"/>
+			<action name="MoveResizeTo">
+				<x>50%</x>
+				<y>0</y>
+				<height>100%</height>
+				<width>50%</width>
+			</action>
+		</keybind>
+		<keybind key="W-w">
+			<action name="Close"/>
+		</keybind>
+		<keybind key="W-S-r">
+			<action name="Reconfigure"/>
+		</keybind>
+		<keybind key="W-Tab">
+			<action name="NextWindow"/>
+		</keybind>
+		<keybind key="W-1">
+			<action name="GoToDesktop"><to>1</to></action>
+		</keybind>
+		<keybind key="W-2">
+			<action name="GoToDesktop"><to>2</to></action>
+		</keybind>
+		<keybind key="W-3">
+			<action name="GoToDesktop"><to>3</to></action>
+		</keybind>
+		<keybind key="W-4">
+			<action name="GoToDesktop"><to>4</to></action>
+		</keybind>
+		<keybind key="W-o">
+			<action name="ToggleOmnipresent"/>
+		</keybind>
+	</keyboard>
+	<mouse>
+		<context name="Titlebar">
+			<mousebind button="Left" action="Press">
+			  <action name="Focus"/>
+			  <action name="Raise"/>
+			</mousebind>
+			<mousebind button="Left" action="Click">
+			  <action name="Unshade"/>
+			</mousebind>
+			<mousebind button="Left" action="Drag">
+			  <action name="Move"/>
+			</mousebind>
+			<mousebind button="Left" action="DoubleClick">
+			  <action name="ToggleMaximizeFull"/>
+			</mousebind>
+
+			<mousebind button="Up" action="Click">
+			  <action name="Shade"/>
+			  <action name="FocusToBottom"/>
+			  <action name="Unfocus"/>
+			</mousebind>
+			<mousebind button="Down" action="Click">
+			  <action name="Unshade"/>
+			</mousebind>
+		</context>
+		<context name="Frame">
+			<mousebind button="W-left" action="Drag">
+				<action name="Move"/>
+			</mousebind>
+			<mousebind button="W-right" action="Drag">
+				<action name="Resize"/>
+			</mousebind>
+		</context>
+	</mouse>
+	<applications>
+		<application class="Alacritty">
+			<decor>no</decor>
+		</application>
+	</applications>
+</openbox_config>
