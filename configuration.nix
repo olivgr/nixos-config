@@ -16,7 +16,25 @@
     "loglevel=3"
   ];
 
-  hardware.bluetooth.enable = false;
+  hardware.pulseaudio.enable = false;
+# pipewire
+  security.rtkit.enable = true;
+  services.pipewire = {
+	  enable = true;
+	  alsa.enable = true;
+	  alsa.support32Bit = true;
+	  jack.enable = true;
+	  pulse.enable = true;
+
+	  extraConfig.pipewire."92-low-latency" = {
+		  context.properties = {
+			  default.clock.rate = 44100;
+			  default.clock.quantum = 64;
+			  default.clock.min-quantum = 64;
+			  default.clock.max-quantum = 512;
+		  };
+	  };
+  };
 
   networking.hostName = "mynixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
