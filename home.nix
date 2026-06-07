@@ -34,9 +34,9 @@
 			font.size = 12.0;
 
 			keyboard.bindings = [
-				{ key = "Plus";		mods = "Control";	action = "IncreaseFontSize"; }
-				{ key = "Minus";	mods = "Control";	action = "DecreaseFontSize"; }
-				{ key = "Key0";		mods = "Control";	action = "ResetFontSize"; }
+				{ key = "Plus";			mods = "Control|Shift";	action = "IncreaseFontSize"; }
+				{ key = "Semicolon";	mods = "Control";		action = "DecreaseFontSize"; }
+				{ key = "Key0";			mods = "Control";		action = "ResetFontSize"; }
 			];	
 		};
 	};
