@@ -16,7 +16,7 @@
     "loglevel=3"
   ];
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 # pipewire
   security.rtkit.enable = true;
   services.pipewire = {
