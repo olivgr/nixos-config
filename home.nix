@@ -50,6 +50,7 @@
 		btop
 		wine64
 		lxappearance
+		orchis-theme
 		xinit
 		brightnessctl
 		redshift
