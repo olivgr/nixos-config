@@ -49,6 +49,7 @@
 		fastfetch
 		btop
 		wine64
+		lxappearance
 		xinit
 		brightnessctl
 		redshift

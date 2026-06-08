@@ -107,6 +107,21 @@
 		</keybind>
 	</keyboard>
 	<mouse>
+		<context name="Close">
+			<mousebind button="Left" action="Press">
+				<action name="Close"/>
+			</mousebind>
+		</context>
+		<context name="Maximize">
+			<mousebind button="Left" action="Press">
+				<action name="ToggleMaximize"/>
+			</mousebind>
+		</context>
+		<context name="Iconify">
+			<mousebind button="Left" action="Press">
+				<action name="Iconify"/>
+			</mousebind>
+		</context>
 		<context name="Titlebar">
 			<mousebind button="Left" action="Press">
 			  <action name="Focus"/>
@@ -121,7 +136,6 @@
 			<mousebind button="Left" action="DoubleClick">
 			  <action name="ToggleMaximizeFull"/>
 			</mousebind>
-
 			<mousebind button="Up" action="Click">
 			  <action name="Shade"/>
 			  <action name="FocusToBottom"/>
@@ -145,4 +159,11 @@
 			<decor>no</decor>
 		</application>
 	</applications>
+	<theme>
+		<font place="ActiveWindow">
+			<name>Noto Sans</name>
+			<size>14</size>
+			<weight>Bold</weight>
+		</font>
+	</theme>
 </openbox_config>

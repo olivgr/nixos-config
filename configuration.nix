@@ -89,5 +89,6 @@
   programs.firefox.enable = true;
   programs.thunar.enable = true;
 
+
   system.stateVersion = "26.05"; # Did you read the comment?
 }
