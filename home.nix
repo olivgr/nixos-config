@@ -72,7 +72,7 @@
 		})
 	];
 
-	services.dunst = {
+	services.dunst = {		
 		enable = true;
 		settings = {
 			global = {

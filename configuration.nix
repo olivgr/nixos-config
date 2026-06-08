@@ -10,15 +10,14 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = false;
-  boot.loader.timeout = 0;
+  boot.loader.timeout = 1;
   boot.kernelParams = [
     "quiet"
     "loglevel=3"
   ];
 
   services.pulseaudio.enable = false;
-# pipewire
-  security.rtkit.enable = true;
+  security.rtkit.enable = true;			# needed for realtime audio with pipewire
   services.pipewire = {
 	  enable = true;
 	  alsa.enable = true;
@@ -45,6 +44,7 @@
   networking.hostName = "mynixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
+  hardware.bluetooth.enable = false;
 
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -55,7 +55,7 @@
     description = "Oliver Grimm";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-	tree
+		tree
     ];
   };
 
