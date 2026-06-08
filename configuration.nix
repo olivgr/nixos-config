@@ -85,6 +85,16 @@
     autoRepeatInterval = 30;
     windowManager.openbox.enable = true;
   };
+  services.libinput = {
+	  enable = true;
+	  mouse = {
+		  naturalScrolling = true;
+		  accelSpeed = "-0.5";
+	  };
+	  touchpad = {
+		  naturalScrolling = true;
+	  };
+  };
 
   programs.firefox.enable = true;
   programs.thunar.enable = true;

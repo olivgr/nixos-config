@@ -45,6 +45,14 @@
 		};
 	};
 
+	programs.fd.enable = true;
+	programs.fzf = {
+		enable = true;
+		defaultCommand = "fd --type f";
+		fileWidgetCommand = "fd --type f";
+		changeDirWidgetCommand = "fd --type d";
+	};
+
 	home.packages = with pkgs; [
 		fastfetch
 		btop
@@ -52,6 +60,7 @@
 		lxappearance
 		orchis-theme
 		xinit
+		mousepad
 		brightnessctl
 		redshift
 		picom
@@ -59,7 +68,6 @@
 		reaper
 		vlc
 		xev
-		fzf
 		libnotify
 		dunst
 		pipewire.jack

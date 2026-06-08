@@ -1,4 +1,7 @@
 <openbox_config>
+	<focus>
+		<focusLast>yes</focusLast>
+	</focus>
 	<desktops>
 		<number>4</number>
 		<firstdesk>1</firstdesk>
