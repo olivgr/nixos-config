@@ -2,7 +2,7 @@
 
 {
 	imports = [
-		./sh.nix
+		.user/sh.nix
 	];
 
 	home.username = "oliver";
