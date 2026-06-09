@@ -71,10 +71,14 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  services.desktopManager.plasma6.enable = true;
+
   services.displayManager.autoLogin = {
     enable = true;
     user = "oliver";
   };
+
+  services.displayManager.defaultSession = "plasma";
 
   services.xserver = {
     enable = true;
