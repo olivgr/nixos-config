@@ -16,13 +16,16 @@
 	programs.alacritty = {
 		enable = true;
 		settings = {
-			font.size = 11.0;
+			font.size = 12.0;
 			window.opacity = 0.9;
+			window.decorations = "None";
 
 			keyboard.bindings = [
 				{ key = "Plus";			mods = "Control|Shift";	action = "IncreaseFontSize"; }
 				{ key = "Semicolon";	mods = "Control";		action = "DecreaseFontSize"; }
 				{ key = "Key0";			mods = "Control";		action = "ResetFontSize"; }
+				{ key = "F11";			action = "ToggleFullscreen";
+				}
 			];	
 		};
 	};
