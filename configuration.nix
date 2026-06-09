@@ -55,7 +55,6 @@
     description = "Oliver Grimm";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-		tree
     ];
   };
 

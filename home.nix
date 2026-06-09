@@ -39,6 +39,7 @@
 	home.packages = with pkgs; [
 		fastfetch
 		btop
+		tree
 		wine64
 		lxappearance
 		drawy
