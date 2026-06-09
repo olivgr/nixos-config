@@ -2,7 +2,8 @@
 
 {
 	imports = [
-		.user/sh.nix
+		./user/sh.nix
+		./user/git.nix
 	];
 
 	home.username = "oliver";
@@ -12,18 +13,6 @@
 	home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
 	home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
 
-	programs.git = {
-		enable = true;
-		settings = {
-			user = {
-				name = "Oliver Grimm";
-				email = "olivergrimm@fastmail.fm";
-			};
-			alias = {
-				lg = "log --oneline --graph";
-			};
-		};
-	};
 
 	programs.alacritty = {
 		enable = true;
