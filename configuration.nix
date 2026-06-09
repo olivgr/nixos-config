@@ -89,7 +89,7 @@
 	  enable = true;
 	  mouse = {
 		  naturalScrolling = true;
-		  accelSpeed = "-0.5";
+		  accelSpeed = "-0.7";
 	  };
 	  touchpad = {
 		  naturalScrolling = true;

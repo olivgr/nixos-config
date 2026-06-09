@@ -1,4 +1,8 @@
 <openbox_config>
+	<resistance>
+		<strength>8</strength>
+		<screen_edge_strength>8</screen_edge_strength>
+	</resistance>
 	<focus>
 		<focusLast>yes</focusLast>
 	</focus>
@@ -28,6 +32,11 @@
 		<keybind key="W-e">
 			<action name="Execute">
 				<command>thunar</command>
+			</action>
+		</keybind>
+		<keybind key="W-n">
+			<action name="Execute">
+				<command>mousepad</command>
 			</action>
 		</keybind>
 		<keybind key="W-r">
@@ -110,6 +119,12 @@
 		</keybind>
 	</keyboard>
 	<mouse>
+		<context name="Client">
+			<mousebind button="Left" action="Press">
+				<action name="Focus"/>
+				<action name="Raise"/>
+			</mousebind>
+		</context>
 		<context name="Close">
 			<mousebind button="Left" action="Press">
 				<action name="Close"/>
@@ -165,7 +180,7 @@
 	<theme>
 		<font place="ActiveWindow">
 			<name>Noto Sans</name>
-			<size>14</size>
+			<size>13</size>
 			<weight>Bold</weight>
 		</font>
 	</theme>

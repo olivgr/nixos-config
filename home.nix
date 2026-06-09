@@ -71,6 +71,7 @@
 		libnotify
 		dunst
 		pipewire.jack
+		ripgrep
 		(pkgs.writeShellApplication
 		{
 			name = "ns";
