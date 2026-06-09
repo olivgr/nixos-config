@@ -2,6 +2,7 @@
 
 let
 	myAliases = {
+		ls = "eza";
 		ll = "ls -alF";
 		va = "cd ~/.wine/drive_c/VASP";
 	};

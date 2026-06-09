@@ -13,7 +13,6 @@
 	home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
 	home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
 
-
 	programs.alacritty = {
 		enable = true;
 		settings = {
@@ -39,6 +38,7 @@
 	home.packages = with pkgs; [
 		fastfetch
 		btop
+		eza
 		tree
 		wine64
 		lxappearance
