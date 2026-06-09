@@ -41,7 +41,7 @@
 	  };
   };
 
-  networking.hostName = "mynixos"; # Define your hostname.
+  networking.hostName = "x230"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = false;

@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+	imports = [
+		./sh.nix
+	];
+
 	home.username = "oliver";
 	home.homeDirectory = "/home/oliver";
 	home.stateVersion = "26.05";
@@ -19,16 +23,6 @@
 				lg = "log --oneline --graph";
 			};
 		};
-	};
-	programs.bash = {
-		enable = true;
-		shellAliases = {
-			ll = "ls -alF";
-			va = "cd ~/.wine/drive_c/VASP";
-		};
-		initExtra = ''
-			export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
-		'';
 	};
 
 	programs.alacritty = {
@@ -58,6 +52,7 @@
 		btop
 		wine64
 		lxappearance
+		drawy
 		orchis-theme
 		xinit
 		mousepad
