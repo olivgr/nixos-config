@@ -12,7 +12,7 @@
 
 	outputs = { self, nixpkgs, home-manager, ... }:
 	{
-		nixosConfigurations.x230 =
+		nixosConfigurations.amp =
 			nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 

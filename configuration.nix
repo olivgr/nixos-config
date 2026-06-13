@@ -7,14 +7,17 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 1;
   boot.kernelParams = [
     "quiet"
     "loglevel=3"
   ];
+
+  systemd.settings.Manager = {
+    DefaultTimeoutStopSec = "15s";
+  }; 
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;			# needed for realtime audio with pipewire
@@ -34,17 +37,18 @@
 		  "context.properties" = {
 			  "default.clock.rate" = 44100;
 			  "default.clock.allowed-rates" = [ 44100 ];
-			  "default.clock.quantum" = 128;
-			  "default.clock.min-quantum" = 128;
+			  "default.clock.quantum" = 512;
+			  "default.clock.min-quantum" = 512;
 			  "default.clock.max-quantum" = 512;
 		  };
 	  };
   };
 
-  networking.hostName = "x230"; # Define your hostname.
+  networking.hostName = "amp"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
-  hardware.bluetooth.enable = false;
+  hardware.bluetooth.enable = true;
+	hardware.graphics.enable = true;
 
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -58,12 +62,15 @@
     ];
   };
 
+	fonts.packages = with pkgs; [
+		jetbrains-mono
+		inter
+	];
+
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     vim 
-    wget
-    nvd
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -71,18 +78,21 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  services.desktopManager.plasma6.enable = true;
 
   services.displayManager.autoLogin = {
     enable = true;
     user = "oliver";
   };
 
+  services.desktopManager.plasma6.enable = true;
   services.displayManager.defaultSession = "plasma";
   services.displayManager.sddm.enable = true;
 
   services.xserver = {
     enable = true;
+		dpi = 86;
+		deviceSection = '' Option "TearFree" "true" '';
+		videoDrivers = [ "amdgpu" ];
     xkb.layout = "jp";
     xkb.options = "ctrl:nocaps";
     autoRepeatDelay = 250;
