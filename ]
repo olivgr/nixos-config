@@ -10,25 +10,13 @@
 	home.homeDirectory = "/home/oliver";
 	home.stateVersion = "26.05";
 
-	home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
-	home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
-	programs.ghostty = {
-		enable = true;
-		settings = {
-			#font-family = "JetBrains Mono";
-			#background-opacity = 0.9;
-		};
-	};
+	#home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
+	#home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
 
 	programs.alacritty = {
 		enable = true;
 		settings = {
-			font = {
-				normal = {
-					family = "Jetbrains Mono";
-				};
-				size = 12.0;
-			};
+			font.size = 12.0;
 			window.opacity = 0.9;
 			window.decorations = "None";
 
@@ -55,11 +43,10 @@
 		btop
 		eza
 		tree
-    wget
-    nvd
-		wineWow64Packages.full
+		wine64
 		lxappearance
 		drawy
+		orchis-theme
 		xinit
 		mousepad
 		brightnessctl
@@ -73,7 +60,6 @@
 		dunst
 		pipewire.jack
 		ripgrep
-		neovim
 		(pkgs.writeShellApplication
 		{
 			name = "ns";
