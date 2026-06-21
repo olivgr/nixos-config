@@ -6,6 +6,7 @@ let
 		ll = "ls -alF";
 		va = "cd ~/.wine/drive_c/VASP";
 		n = "nvim";
+    update = "~/nixos/scripts/update.sh";
 	};
 in
 {

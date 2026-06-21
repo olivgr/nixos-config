@@ -1,10 +1,13 @@
 <openbox_config>
 	<resistance>
 		<strength>8</strength>
-		<screen_edge_strength>8</screen_edge_strength>
+		<screen_edge_strength>0</screen_edge_strength>
 	</resistance>
 	<focus>
+    <focusNew>yes</focusNew>
 		<focusLast>yes</focusLast>
+    <focusDelay>200</focusDelay>
+    <raiseOnFocus>yes</raiseOnFocus>
 	</focus>
 	<desktops>
 		<number>4</number>
@@ -15,52 +18,86 @@
 			<name>3</name>
 			<name>4</name>
 		</names>
-		<popupTime>875</popupTime>
+		<popupTime>0</popupTime>
 	</desktops>
 	<keyboard>
 		<numlock>yes</numlock>
-		<keybind key="W-Return">
+		<keybind key="W-F1">
+      <description>Show Openbox Shortcuts</description>
+      <action name="Execute">
+        <command>~/nixos/scripts/show-openbox-shortcuts.sh</command>
+			</action>
+		</keybind>
+		<keybind key="W-Escape">
+      <description>Show powermenu</description>
+      <action name="Execute">
+        <command>~/nixos/scripts/powermenu.sh</command>
+			</action>
+		</keybind>
+		<keybind key="S-F12">
+      <description>Restart Polybar</description>
 			<action name="Execute">
-				<command>alacritty</command>
+				<command>polybar-msg cmd restart</command>
+			</action>
+		</keybind>
+		<keybind key="F12">
+      <description>Toggle Polybar</description>
+			<action name="Execute">
+				<command>polybar-msg cmd toggle</command>
+			</action>
+		</keybind>
+		<keybind key="W-Return">
+      <description>Open terminal</description>
+			<action name="Execute">
+				<command>ghostty</command>
 			</action>
 		</keybind>
 		<keybind key="W-S-Return">
+      <description>Open browser</description>
 			<action name="Execute">
 				<command>firefox</command>
 			</action>
 		</keybind>
-		<keybind key="W-e">
+		<keybind key="W-E">
+      <description>Open file browser</description>
 			<action name="Execute">
 				<command>thunar</command>
 			</action>
 		</keybind>
-		<keybind key="W-n">
+		<keybind key="W-N">
+      <description>Open mousepad</description>
 			<action name="Execute">
 				<command>mousepad</command>
 			</action>
 		</keybind>
-		<keybind key="W-r">
+		<keybind key="W-R">
+      <description>Open Reaper</description>
 			<action name="Execute">
 				<command>pw-jack reaper</command>
 			</action>
 		</keybind>
 		<keybind key="F10">
+      <description>Toggle maximize</description>
 			<action name="ToggleMaximize"/>
 		</keybind>
 		<keybind key="F11">
+      <description>Toggle fullscreen</description>
 			<action name="ToggleFullscreen"/>
 		</keybind>
 		<keybind key="XF86MonBrightnessUp">
+      <description>Brightness +10%</description>
 			<action name="Execute">
 				<command>brightnessctl set +10%</command>
 			</action>
 		</keybind>
 		<keybind key="XF86MonBrightnessDown">
+      <description>Brightness -10%</description>
 			<action name="Execute">
 				<command>brightnessctl set 10%-</command>
 			</action>
 		</keybind>
-		<keybind key="W-h">
+		<keybind key="W-H">
+      <description>Snap window to left half</description>
 			<action name="UnmaximizeFull"/>
 			<action name="MoveResizeTo">
 				<x>0</x>
@@ -69,7 +106,8 @@
 				<width>50%</width>
 			</action>
 		</keybind>
-		<keybind key="W-l">
+		<keybind key="W-L">
+      <description>Snap window to right half</description>
 			<action name="UnmaximizeFull"/>
 			<action name="MoveResizeTo">
 				<x>50%</x>
@@ -78,41 +116,85 @@
 				<width>50%</width>
 			</action>
 		</keybind>
-		<keybind key="W-w">
+		<keybind key="W-W">
+      <description>Close window</description>
 			<action name="Close"/>
 		</keybind>
-		<keybind key="W-S-r">
+		<keybind key="W-S-R">
+      <description>Reload Openbox config</description>
 			<action name="Reconfigure"/>
 		</keybind>
 		<keybind key="W-Tab">
-			<action name="NextWindow"/>
+      <description>Next window</description>
+      <action name="NextWindow">
+        <!--command>rofi -show window -selected-row 1</command-->
+        <finalactions>
+          <action name="Focus"/>
+          <action name="Raise"/>
+        </finalactions>
+      </action>
 		</keybind>
 		<keybind key="W-1">
+      <description>Show desktop 1</description>
 			<action name="GoToDesktop"><to>1</to></action>
 		</keybind>
 		<keybind key="W-2">
+      <description>Show desktop 2</description>
 			<action name="GoToDesktop"><to>2</to></action>
 		</keybind>
 		<keybind key="W-3">
+      <description>Show desktop 3</description>
 			<action name="GoToDesktop"><to>3</to></action>
 		</keybind>
 		<keybind key="W-4">
+      <description>Show desktop 4</description>
 			<action name="GoToDesktop"><to>4</to></action>
 		</keybind>
-		<keybind key="W-o">
+		<keybind key="W-S-1">
+      <description>Move to desktop 1</description>
+      <action name="SendToDesktop"><to>1</to><wrap>no</wrap></action>
+		</keybind>
+		<keybind key="W-S-2">
+      <description>Move to desktop 2</description>
+      <action name="SendToDesktop"><to>2</to><wrap>no</wrap></action>
+		</keybind>
+		<keybind key="W-S-3">
+      <description>Move to desktop 3</description>
+      <action name="SendToDesktop"><to>3</to><wrap>no</wrap></action>
+		</keybind>
+		<keybind key="W-S-4">
+      <description>Move to desktop 4</description>
+      <action name="SendToDesktop"><to>4</to><wrap>no</wrap></action>
+		</keybind>
+		<keybind key="W-O">
+      <description>Toggle omni window</description>
 			<action name="ToggleOmnipresent"/>
 		</keybind>
-		<keybind key="W-b">
+     <!-- show desktop/minimize all -->
+    <keybind key="W-D">
+      <description>Toggle show desktop</description>
+      <action name="ToggleShowDesktop"/>
+    </keybind>
+    <keybind key="W-space">
+      <description>Show launcher</description>
+      <action name="Execute">
+        <command>rofi -show drun -dpi 86</command>
+      </action>
+    </keybind>
+		<keybind key="W-B">
+      <description>Show battery status</description>
 			<action name="Execute">
 				<command>~/nixos/scripts/battery-notify.sh</command>
 			</action>
 		</keybind>
-		<keybind key="W-t">
+		<keybind key="W-T">
+      <description>Show time</description>
 			<action name="Execute">
 				<command>~/nixos/scripts/time-notify.sh</command>
 			</action>
 		</keybind>
-		<keybind key="W-d">
+		<keybind key="W-S-T">
+      <description>Show time and date</description>
 			<action name="Execute">
 				<command>~/nixos/scripts/datetime-notify.sh</command>
 			</action>
@@ -176,12 +258,29 @@
 		<application class="Alacritty">
 			<decor>no</decor>
 		</application>
+		<application class="com.mitchellh.ghostty">
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+      </position>
+		</application>
+		<application class="Org.xfce.mousepad">
+      <position force="yes">
+        <x>center</x>
+        <y>center</y>
+      </position>
+		</application>
 	</applications>
 	<theme>
 		<font place="ActiveWindow">
 			<name>Noto Sans</name>
-			<size>13</size>
+			<size>14</size>
 			<weight>Bold</weight>
+		</font>
+		<font place="InactiveWindow">
+			<name>Noto Sans</name>
+			<size>14</size>
+			<weight>Regular</weight>
 		</font>
 	</theme>
 </openbox_config>

@@ -15,10 +15,35 @@
 	programs.ghostty = {
 		enable = true;
 		settings = {
+      keybind = [
+        "ctrl+shift+;=increase_font_size:1"
+      ];
 			#font-family = "JetBrains Mono";
-			#background-opacity = 0.9;
+			#background-opacity = 0.7;
+      window-decoration = "none";
+      window-width = 68;
+      window-height = 22;
 		};
 	};
+
+  programs.rofi = {
+    enable = true;
+    theme = "purple";
+    font = "sans-serif";
+    package = pkgs.rofi;
+    modes = [
+      "drun"
+      "run"
+      "window"
+      "windowcd"
+      "ssh"
+    ];
+    location = "center";
+    terminal = "/etc/profiles/per-user/oliver/bin/ghostty";
+    extraConfig = {
+      show-icons = true;
+    };
+  };
 
 	programs.alacritty = {
 		enable = true;
@@ -42,6 +67,7 @@
 		};
 	};
 
+
 	programs.fd.enable = true;
 	programs.fzf = {
 		enable = true;
@@ -50,6 +76,7 @@
 		changeDirWidgetCommand = "fd --type d";
 	};
 
+
 	home.packages = with pkgs; [
 		fastfetch
 		btop
@@ -57,13 +84,26 @@
 		tree
     wget
     nvd
-		wineWow64Packages.full
+		wineWow64Packages.staging
+    polybar
+    pavucontrol
+    ddcutil
+		#hyprlauncher
+		#hyprpaper
+    #hyprpicker
+    #hyprlock
+    #hyprpwcenter
+    #hyprshutdown
+    #grim
+    #slurp
+    #swappy
+    #wlsunset
 		lxappearance
+    xmlstarlet
 		drawy
 		xinit
 		mousepad
 		brightnessctl
-		redshift
 		picom
 		feh
 		reaper
@@ -71,6 +111,7 @@
 		xev
 		libnotify
 		dunst
+    redshift
 		pipewire.jack
 		ripgrep
 		neovim
@@ -85,12 +126,16 @@
 		})
 	];
 
+
 	services.dunst = {		
 		enable = true;
 		settings = {
 			global = {
-				font = "monospace 16";
-				width = 400; # max width in pixels
+				font = "monospace 13";
+				width = 350; # max width in pixels
+        transparency = 20;
+        #origin = "top-center";
+        #offset = "0x0";
 			};
 		};
 	};
