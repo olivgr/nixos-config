@@ -9,15 +9,26 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 1;
-  boot.kernelParams = [
-    "quiet"
-    "loglevel=3"
+  boot.loader.timeout = 2;
+
+  boot.kernelModules = [
+    "i2c-dev"
   ];
+  #boot.kernelParams = [
+    #"quiet"
+    #"loglevel=3"
+  #];
 
   systemd.settings.Manager = {
     DefaultTimeoutStopSec = "15s";
   }; 
+
+	#services.sunshine = {
+		#enable = true;
+		#autoStart = true;
+		#capSysAdmin = true;
+		#openFirewall = true;
+	#};
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;			# needed for realtime audio with pipewire
@@ -49,6 +60,7 @@
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
 	hardware.graphics.enable = true;
+  hardware.i2c.enable = true;
 
   time.timeZone = "Asia/Tokyo";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -84,12 +96,25 @@
     user = "oliver";
   };
 
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.defaultSession = "plasma";
+  #services.desktopManager.plasma6.enable = true;
+  #services.displayManager.defaultSession = "plasma";
   services.displayManager.sddm.enable = true;
+  #programs.hyprland = {
+  #  enable = true;
+  #  withUWSM = true;
+  #  xwayland.enable = true;
+  #};
 
   services.xserver = {
     enable = true;
+      # for 4k:
+      #xrandr --output HDMI-A-0 --mode 3840x2160 --rate 120
+    displayManager.sessionCommands = ''
+      xrandr --output HDMI-A-0 --mode 1024x768 --rate 60
+    '';
+    # for 4k:
+		#dpi = 168;
+    # also change rofi dpi in openbox.rc
 		dpi = 86;
 		deviceSection = '' Option "TearFree" "true" '';
 		videoDrivers = [ "amdgpu" ];
@@ -99,11 +124,12 @@
     autoRepeatInterval = 30;
     windowManager.openbox.enable = true;
   };
+
   services.libinput = {
 	  enable = true;
 	  mouse = {
 		  naturalScrolling = true;
-		  accelSpeed = "-0.7";
+		  accelSpeed = "-0.85";
 	  };
 	  touchpad = {
 		  naturalScrolling = true;
@@ -112,6 +138,8 @@
 
   programs.firefox.enable = true;
   programs.thunar.enable = true;
+	programs.localsend.enable = true;
+  programs.steam.enable = true;
 
 
   system.stateVersion = "26.05"; # Did you read the comment?
