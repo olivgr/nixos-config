@@ -40,6 +40,12 @@
 				<command>polybar-msg cmd restart</command>
 			</action>
 		</keybind>
+		<keybind key="F3">
+      <description>Expose</description>
+			<action name="Execute">
+				<command>skippy-xd</command>
+			</action>
+		</keybind>
 		<keybind key="F12">
       <description>Toggle Polybar</description>
 			<action name="Execute">
@@ -127,6 +133,7 @@
 		<keybind key="W-Tab">
       <description>Next window</description>
       <action name="NextWindow">
+        <dialog>no</dialog>
         <!--command>rofi -show window -selected-row 1</command-->
         <finalactions>
           <action name="Focus"/>
