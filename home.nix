@@ -99,6 +99,7 @@
     #swappy
     #wlsunset
 		lxappearance
+    skippy-xd
     xmlstarlet
 		drawy
 		xinit
@@ -108,6 +109,7 @@
 		feh
 		reaper
 		vlc
+    sioyek
 		xev
 		libnotify
 		dunst
