@@ -8,6 +8,7 @@
 	home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
 	home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
 
+
 	programs.ghostty = {
 		enable = true;
     settings = {
@@ -101,6 +102,7 @@
 		feh
     xev
 		reaper
+    xwayland-satellite # needed for reaper in niri
 		vlc
 		xev
 		libnotify
