@@ -125,6 +125,8 @@
     #withUWSM = true;
     #xwayland.enable = true;
   #};
+  services.xserver.enable = true;
+  programs.xwayland.enable = true;
   programs.niri = {
     enable = true;
   };
