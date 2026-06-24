@@ -1,29 +1,45 @@
 { config, pkgs, ... }:
 
 {
-	imports = [
-		./user/sh.nix
-		./user/git.nix
-	];
-
 	home.username = "oliver";
 	home.homeDirectory = "/home/oliver";
 	home.stateVersion = "26.05";
 
 	home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
 	home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
+
 	programs.ghostty = {
 		enable = true;
-		settings = {
+    settings = {
       keybind = [
         "ctrl+shift+;=increase_font_size:1"
       ];
-			#font-family = "JetBrains Mono";
-			#background-opacity = 0.7;
       window-decoration = "none";
-      window-width = 68;
-      window-height = 22;
+    };
+  };
+
+	programs.git = {
+		enable = true;
+		settings = {
+			user = {
+				name = "Oliver Grimm";
+				email = "olivergrimm@fastmail.fm";
+			};
+			alias = {
+				lg = "log --oneline --graph";
+			};
 		};
+	};
+	programs.bash = {
+		enable = true;
+		shellAliases = {
+			ll = "ls -alF";
+			va = "cd ~/.wine/drive_c/VASP";
+      n = "nvim";
+		};
+		initExtra = ''
+			export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
+		'';
 	};
 
   programs.rofi = {
@@ -48,25 +64,16 @@
 	programs.alacritty = {
 		enable = true;
 		settings = {
-			font = {
-				normal = {
-					family = "Jetbrains Mono";
-				};
-				size = 12.0;
-			};
+			font.size = 11.0;
 			window.opacity = 0.9;
-			window.decorations = "None";
 
 			keyboard.bindings = [
 				{ key = "Plus";			mods = "Control|Shift";	action = "IncreaseFontSize"; }
 				{ key = "Semicolon";	mods = "Control";		action = "DecreaseFontSize"; }
 				{ key = "Key0";			mods = "Control";		action = "ResetFontSize"; }
-				{ key = "F11";			action = "ToggleFullscreen";
-				}
 			];	
 		};
 	};
-
 
 	programs.fd.enable = true;
 	programs.fzf = {
@@ -76,47 +83,36 @@
 		changeDirWidgetCommand = "fd --type d";
 	};
 
-
 	home.packages = with pkgs; [
 		fastfetch
 		btop
-		eza
-		tree
+    eza
+    tree
     wget
     nvd
 		wineWow64Packages.staging
-    polybar
-    pavucontrol
-    ddcutil
-		#hyprlauncher
-		#hyprpaper
-    #hyprpicker
-    #hyprlock
-    #hyprpwcenter
-    #hyprshutdown
-    #grim
-    #slurp
-    #swappy
-    #wlsunset
 		lxappearance
-    skippy-xd
-    xmlstarlet
-		drawy
+    pavucontrol
+    wlsunset
+		orchis-theme
 		xinit
 		mousepad
-		brightnessctl
 		picom
 		feh
+    xev
 		reaper
 		vlc
-    sioyek
 		xev
 		libnotify
+    neovim
+		rofi
+    pcmanfm
 		dunst
-    redshift
+    fuzzel
+		sioyek
+    drawy
 		pipewire.jack
 		ripgrep
-		neovim
 		(pkgs.writeShellApplication
 		{
 			name = "ns";
@@ -128,16 +124,12 @@
 		})
 	];
 
-
 	services.dunst = {		
 		enable = true;
 		settings = {
 			global = {
-				font = "monospace 13";
-				width = 350; # max width in pixels
-        transparency = 20;
-        #origin = "top-center";
-        #offset = "0x0";
+				font = "monospace 16";
+				width = 400; # max width in pixels
 			};
 		};
 	};
