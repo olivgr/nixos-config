@@ -2,3 +2,4 @@ picom --config ~/.config/picom/picom.conf &
 polybar &
 feh --bg-fill ~/Pictures/wallpapers/cloud.jpg
 redshift -l 35.6895:139.6917 -t 6000:4000 -b 1.0:0.7 &
+~/nixos/scripts/fcitx5.sh &

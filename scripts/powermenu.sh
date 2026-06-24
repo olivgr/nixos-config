@@ -5,7 +5,8 @@ choice=$(printf "script\nterminal\nfiles\nbrowser\nreaper\nmousepad\nlocalsend\n
   rofi -dmenu -p "" -theme-str 'window { 
                             width: 130px; 
                             height: 300px; 
-                            y-offset: -34px;
+                            x-offset: 5px;
+                            y-offset: -5px;
                           }' \
     -location 7 -anchor southwest \
 )
@@ -18,7 +19,7 @@ case "$choice" in
     ghostty
     ;;
   files)
-    thunar
+    pcmanfm
     ;;
   browser)
     firefox
