@@ -30,6 +30,7 @@
 		#openFirewall = true;
 	#};
 
+
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;			# needed for realtime audio with pipewire
   services.pipewire = {
@@ -125,8 +126,6 @@
     #withUWSM = true;
     #xwayland.enable = true;
   #};
-  services.xserver.enable = true;
-  programs.xwayland.enable = true;
   programs.niri = {
     enable = true;
   };

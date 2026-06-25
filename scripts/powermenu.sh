@@ -2,13 +2,7 @@
 # This is a script that i call from polybar
 
 choice=$(printf "script\nterminal\nfiles\nbrowser\nreaper\nmousepad\nlocalsend\nvolume\n---------\nreboot\npoweroff\n" | \
-  rofi -dmenu -p "" -theme-str 'window { 
-                            width: 130px; 
-                            height: 300px; 
-                            x-offset: 5px;
-                            y-offset: -5px;
-                          }' \
-    -location 7 -anchor southwest \
+  fuzzel --dmenu --hide-prompt --anchor=bottom-left --width=10 --lines=12 --horizontal-pad=10
 )
 
 case "$choice" in
