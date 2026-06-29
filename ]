@@ -1,0 +1,20 @@
+[main]
+lines=12
+width=10
+use-bold=no 
+minimal-lines=yes
+font=Noto Sans:size=14
+hide-prompt=yes
+anchor=bottom-left
+horizontal-pad=10
+vertical-pad=10
+
+[colors]
+# RRGGBBAA
+background=1a1b26ff
+text=73dacaff
+selection-text=ff9e64ff
+selection=1a1b2688
+
+
+
