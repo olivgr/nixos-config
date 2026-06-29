@@ -8,16 +8,6 @@
 	home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
 	home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
 
-	programs.ghostty = {
-		enable = true;
-    settings = {
-      keybind = [
-        "ctrl+shift+;=increase_font_size:1"
-      ];
-      window-decoration = "none";
-    };
-  };
-
 	programs.git = {
 		enable = true;
 		settings = {
@@ -44,30 +34,12 @@
 		'';
 	};
 
-  programs.rofi = {
-    enable = true;
-    theme = "purple";
-    font = "sans-serif";
-    package = pkgs.rofi;
-    modes = [
-      "drun"
-      "run"
-      "window"
-      "windowcd"
-      "ssh"
-    ];
-    location = "center";
-    terminal = "/etc/profiles/per-user/oliver/bin/ghostty";
-    extraConfig = {
-      show-icons = true;
-    };
-  };
-
 	programs.alacritty = {
 		enable = true;
 		settings = {
 			font.size = 13.0;
-			window.opacity = 0.8;
+      window.decorations = "none";
+			#window.opacity = 0.8;
 
 			keyboard.bindings = [
 				{ key = "Plus";			mods = "Control|Shift";	action = "IncreaseFontSize"; }
@@ -77,6 +49,16 @@
 		};
 	};
 
+	programs.ghostty = {
+		enable = true;
+    settings = {
+      keybind = [
+        "ctrl+shift+;=increase_font_size:1"
+      ];
+      window-decoration = "none";
+    };
+  };
+
 	programs.fd.enable = true;
 	programs.fzf = {
 		enable = true;
@@ -85,26 +67,43 @@
 		changeDirWidgetCommand = "fd --type d";
 	};
 
+  #programs.waybar.enable = true;
   programs.swayimg.enable = true;
+  services.swayidle.enable = true;
 
   services.mako = {
     enable = true;
     settings = {
       default-timeout = 5000;
-      font = "Noto Sans 13";
+      font = "Noto Sans 12";
     };
   };
 
+
   gtk = {
     enable = true;
-    theme = {
-      name = "Colloid-Dark";
-      package = pkgs.colloid-gtk-theme;
-    };
-    cursorTheme = {
-      package = pkgs.colloid-cursors;
-      name = "Colloid";
-    };
+    gtk3.extraCss = ''
+      .window-frame,
+      decoration {
+        border-radius: 0;
+        }
+        '';
+    gtk4.extraCss = ''
+      window,
+      window.background,
+      decoration {
+        border-radius: 0;
+        }
+        '';
+
+    #theme = {
+      #name = "Colloid-Dark";
+      #package = pkgs.colloid-gtk-theme;
+    #};
+    #cursorTheme = {
+      #package = pkgs.colloid-cursors;
+      #name = "Colloid";
+    #};
     iconTheme = {
       package = pkgs.colloid-icon-theme;
       name = "Colloid-Dark";
@@ -125,12 +124,10 @@
 		lxappearance
     adwaita-icon-theme
     colloid-icon-theme
-    colloid-gtk-theme
-    colloid-cursors
-    tela-icon-theme
     pavucontrol
     wlsunset
     swaybg
+    hyprpicker
 		#orchis-theme
 		#xinit
 		#picom
@@ -143,7 +140,7 @@
 		libnotify
     neovim
 		rofi
-    pcmanfm
+    nautilus
     fuzzel
     pixman
     wayland
@@ -152,6 +149,7 @@
     libpng
 		sioyek
     drawy
+    anki
 		(pkgs.writeShellApplication
 		{
 			name = "ns";

@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 # This is a script that i call from polybar
 
-choice=$(printf "script\nterminal\nfiles\nbrowser\nreaper\nmousepad\nlocalsend\nvolume\n---------\nreboot\npoweroff\n" | \
-  fuzzel --dmenu --hide-prompt --anchor=bottom-left --width=10 --lines=12 --horizontal-pad=10
+choice=$(printf "vasp/script\nterminal\nfiles\nbrowser\nreaper\nmousepad\nlocalsend\nvolume\nnmtui\n---------\nreboot\npoweroff\n" | \
+  fuzzel --dmenu --config ~/.config/fuzzel/fuzzel-power.ini
 )
 
 case "$choice" in
-  script)
-    ghostty --window-width=102 --window-height=36 -e ~/nixos/scripts/vaspnvim.sh
+  vasp/script)
+    #ghostty --window-width=102 --window-height=36 -e ~/nixos/scripts/vaspnvim.sh
+    alacritty -e ~/nixos/scripts/vaspnvim.sh
     ;;
   terminal)
-    ghostty
+    alacritty
     ;;
   files)
-    pcmanfm
+    nautilus
     ;;
   browser)
     firefox
@@ -29,6 +30,9 @@ case "$choice" in
     ;;
   volume)
     pavucontrol
+    ;;
+  nmtui)
+    alacritty -e nmtui
     ;;
   reboot)
     wineserver -k -w 2>/dev/null

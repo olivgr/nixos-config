@@ -23,12 +23,12 @@
     DefaultTimeoutStopSec = "15s";
   }; 
 
-	#services.sunshine = {
-		#enable = true;
-		#autoStart = true;
-		#capSysAdmin = true;
-		#openFirewall = true;
-	#};
+	services.sunshine = {
+		enable = true;
+		autoStart = true;
+		capSysAdmin = true;
+		openFirewall = true;
+	};
 
 
   services.pulseaudio.enable = false;
@@ -131,7 +131,7 @@
   };
 
   services.displayManager.sddm.wayland.enable = true;
-  #programs.river = {
+  #programs.river-classic = {
     #enable = true;
     #xwayland.enable = true;
   #};
@@ -170,7 +170,6 @@
   programs.firefox.enable = true;
 	programs.localsend.enable = true;
   programs.steam.enable = true;
-
 
   system.stateVersion = "26.05"; # Did you read the comment?
 }
