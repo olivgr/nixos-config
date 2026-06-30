@@ -79,22 +79,21 @@
     };
   };
 
-
   gtk = {
     enable = true;
     gtk3.extraCss = ''
       .window-frame,
       decoration {
         border-radius: 0;
-        }
-        '';
+      }
+      '';
     gtk4.extraCss = ''
       window,
       window.background,
       decoration {
         border-radius: 0;
-        }
-        '';
+      }
+      '';
 
     #theme = {
       #name = "Colloid-Dark";
@@ -120,6 +119,7 @@
     xev
 		pipewire.jack
 		ripgrep
+    zig
 		wineWow64Packages.staging
 		lxappearance
     adwaita-icon-theme
@@ -128,12 +128,8 @@
     wlsunset
     swaybg
     hyprpicker
-		#orchis-theme
-		#xinit
-		#picom
-		#feh
 		reaper
-    xwayland-satellite # needed for reaper in niri
+    xwayland-satellite # for reaper in niri
 		mousepad
     gedit
 		vlc
