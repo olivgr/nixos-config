@@ -55,6 +55,7 @@
 	programs.ghostty = {
 		enable = true;
     settings = {
+      #theme = "Nightfox";
       keybind = [
         "ctrl+shift+;=increase_font_size:1"
       ];
@@ -115,36 +116,33 @@
 	home.packages = with pkgs; [
 		fastfetch
 		btop
-    eza
+    eza         # ls replacement
     wget
-    nvd
+    nvd         # show package diffs
     xev
 		pipewire.jack
 		ripgrep
     zig
 		wineWow64Packages.staging
-		lxappearance
-    adwaita-icon-theme
     colloid-icon-theme
     pavucontrol
     wlsunset
-    swaybg
-    hyprpicker
+    swaybg      # wallpaper
+    hyprpicker  # color-picker
 		reaper
     xwayland-satellite # for reaper in niri
-		mousepad
+		mousepad    # notepad like
     gedit
 		vlc
-		libnotify
+		libnotify   # needed for notifications
     neovim
-		rofi
-    nautilus
-    fuzzel
-    pixman
-    wayland
-    libxkbcommon
-    cairo
-    libpng
+    nautilus    # file browser
+    fuzzel      # file picker like rofi
+    #pixman
+    #wayland
+    #libxkbcommon
+    #cairo
+    #libpng
 		sioyek
     drawy
     anki
