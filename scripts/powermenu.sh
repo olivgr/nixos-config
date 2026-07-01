@@ -8,10 +8,10 @@ choice=$(printf "vasp/script\nterminal\nfiles\nbrowser\nreaper\nmousepad\nlocals
 case "$choice" in
   vasp/script)
     #ghostty --window-width=102 --window-height=36 -e ~/nixos/scripts/vaspnvim.sh
-    alacritty -e ~/nixos/scripts/vaspnvim.sh
+    ghostty -e ~/nixos/scripts/vaspnvim.sh
     ;;
   terminal)
-    alacritty
+    ghostty
     ;;
   files)
     nautilus
@@ -32,7 +32,7 @@ case "$choice" in
     pavucontrol
     ;;
   nmtui)
-    alacritty -e nmtui
+    ghostty -e nmtui
     ;;
   reboot)
     wineserver -k -w 2>/dev/null
