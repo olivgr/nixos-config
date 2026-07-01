@@ -24,7 +24,10 @@
 	programs.bash = {
 		enable = true;
 		shellAliases = {
-			ll = "ls -alF";
+      ls = "eza";
+			ll = "eza -l --header --git";
+			la = "eza -la --header --git";
+			tree = "eza -tree --git";
 			va = "cd ~/.wine/drive_c/VASP";
       n = "nvim";
       update = "~/nixos/scripts/update.sh";
@@ -113,7 +116,6 @@
 		fastfetch
 		btop
     eza
-    tree
     wget
     nvd
     xev
