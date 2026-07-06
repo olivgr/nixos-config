@@ -8,6 +8,16 @@
 	home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
 	home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
 
+  # this sets Nautilus File Explorer to dark mode:
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
+    };
+  };
+
 	programs.git = {
 		enable = true;
 		settings = {
@@ -29,6 +39,7 @@
 			la = "eza -la --header --git";
 			tree = "eza -tree --git";
 			va = "cd ~/.wine/drive_c/VASP";
+      kate = "WINEDEBUG=-all wine '/home/oliver/.wine/drive_c/Program Files/Kate/bin/kate.exe'";
       n = "nvim";
       update = "~/nixos/scripts/update.sh";
 		};
@@ -56,6 +67,7 @@
 		enable = true;
     settings = {
       #theme = "Nightfox";
+      font-size = 11;
       keybind = [
         "ctrl+shift+;=increase_font_size:1"
       ];
@@ -67,9 +79,11 @@
 	programs.fzf = {
 		enable = true;
 		defaultCommand = "fd --type f";
-		fileWidgetCommand = "fd --type f";
+		fileWidget.command = "fd --type f";
 		changeDirWidgetCommand = "fd --type d";
 	};
+
+  programs.eww.enable = true;
 
   #programs.waybar.enable = true;
   programs.swayimg.enable = true;
@@ -124,7 +138,9 @@
 		ripgrep
     zig
 		wineWow64Packages.staging
+    winetricks
     colloid-icon-theme
+    colloid-gtk-theme
     pavucontrol
     wlsunset
     swaybg      # wallpaper
@@ -137,12 +153,13 @@
 		libnotify   # needed for notifications
     neovim
     nautilus    # file browser
+    thunar
     fuzzel      # file picker like rofi
-    #pixman
-    #wayland
-    #libxkbcommon
-    #cairo
-    #libpng
+    slurp
+    grim
+    satty
+    wl-clipboard
+    jq
 		sioyek
     drawy
     anki

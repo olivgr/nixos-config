@@ -130,6 +130,8 @@
     enable = true;
   };
 
+  programs.gnome-disks.enable = true;
+
   services.displayManager.sddm.wayland.enable = true;
   #programs.river-classic = {
     #enable = true;
