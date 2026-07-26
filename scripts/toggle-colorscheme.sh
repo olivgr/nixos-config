@@ -14,6 +14,7 @@ if [[ "$current" == "'prefer-dark'" ]]; then
         "<cmd>set background=light<CR>" \
         2>/dev/null
     done
+	notify-send "Light mode activated" --expire-time=2000
 else
     dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
     gsettings set org.gnome.desktop.interface gtk-theme "$DARK_THEME" \
@@ -23,4 +24,5 @@ else
         "<cmd>set background=dark<CR>" \
         2>/dev/null
     done
+	notify-send "Dark mode activated" --expire-time=2000
 fi

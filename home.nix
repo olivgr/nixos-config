@@ -11,11 +11,11 @@
     # this sets Nautilus File Explorer to dark mode:
     dconf = {
         enable = true;
-        settings = {
-            "org/gnome/desktop/interface" = {
-                color-scheme = "prefer-dark";
-            };
-        };
+        #settings = {
+            #"org/gnome/desktop/interface" = {
+                #color-scheme = "prefer-dark";
+            #};
+        #};
     };
 
     programs.git = {
@@ -76,7 +76,13 @@
         settings = {
             #theme = "light:Catppuccin Latte,dark:Catppuccin Mocca";
             theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
-            font-size = 12;
+            #theme = "Dark Pastel";
+            font-size = 13;
+            font-feature = [
+                "-liga"
+                "-calt"
+                "-dlig"
+            ];
             keybind = [
                 "ctrl+shift+;=increase_font_size:1"
             ];
@@ -106,6 +112,7 @@
         settings = {
             default-timeout = 5000;
             font = "Noto Sans 12";
+            margin = "44,4,0,0";
         };
     };
 
@@ -183,6 +190,7 @@
         mousepad    # notepad like
         gedit
         vlc
+        darktable
         libnotify   # needed for notifications
         neovim
         neovim-remote
@@ -197,6 +205,7 @@
         sioyek
         drawy
         anki
+        lmstudio
         (pkgs.writeShellApplication
          {
              name = "ns";
