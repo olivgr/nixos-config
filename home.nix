@@ -8,15 +8,7 @@
     home.file.".config/openbox/rc.xml".source = ./.config/openbox/rc.xml;
     home.file.".config/openbox/autostart".source = ./.config/openbox/autostart;
 
-    # this sets Nautilus File Explorer to dark mode:
-    dconf = {
-        enable = true;
-        #settings = {
-            #"org/gnome/desktop/interface" = {
-                #color-scheme = "prefer-dark";
-            #};
-        #};
-    };
+    dconf.enable = true;
 
     programs.git = {
         enable = true;
@@ -74,7 +66,6 @@
     programs.ghostty = {
         enable = true;
         settings = {
-            #theme = "light:Catppuccin Latte,dark:Catppuccin Mocca";
             theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
             #theme = "Dark Pastel";
             font-size = 13;
@@ -90,10 +81,6 @@
         };
     };
 
-    programs.foot = {
-        enable = true;
-    };
-
     programs.fd.enable = true;
     programs.fzf = {
         enable = true;
@@ -105,8 +92,22 @@
     programs.onlyoffice.enable = true;
     programs.eww.enable = true;
     programs.swayimg.enable = true;
+    programs.firefox = {
+        enable = true;
+        #nativeMessagingHosts = [
+            #pkgs.keepassxc
+        #];
+    };
+    programs.keepassxc = {
+        enable = true;
+        #settings = {
+            #Browser.UpdateBinaryPath = false;
+        #};
+    };
+
     services.swayidle.enable = true;
 
+    # Notifications
     services.mako = {
         enable = true;
         settings = {
@@ -118,11 +119,6 @@
 
     gtk = {
         enable = true;
-        #theme = {
-            #name = "Adwaita";
-            #package = pkgs.gnome-themes-extra;
-        #};
-
         gtk3.extraCss = ''
             .window-frame,
             decoration {
@@ -177,7 +173,6 @@
         #clang
         zig
         wineWow64Packages.staging
-        winetricks
         colloid-icon-theme
         colloid-gtk-theme
         apple-cursor
@@ -206,6 +201,9 @@
         drawy
         anki
         lmstudio
+        abcde       # cd ripper
+        fractal     # matrix client
+        goldendict-ng
         (pkgs.writeShellApplication
          {
              name = "ns";

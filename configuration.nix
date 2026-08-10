@@ -147,10 +147,6 @@
     programs.gnome-disks.enable = true;
 
     services.displayManager.sddm.wayland.enable = true;
-    #programs.river-classic = {
-    #enable = true;
-    #xwayland.enable = true;
-    #};
 
     #services.xserver = {
     #enable = true;
@@ -183,7 +179,6 @@
         };
     };
 
-    programs.firefox.enable = true;
     programs.localsend.enable = true;
     programs.steam.enable = true;
 
