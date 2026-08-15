@@ -31,7 +31,7 @@
     };
 
     services.openssh = {
-        enable = true;
+        enable = false;
 
         settings = {
             PasswordAuthentication = false;
@@ -57,13 +57,20 @@
                     "wireplumber.settings"."device.routes.default-sink-volume" = 0.99;
                 };
             };
+            extraConfig.pipewire."10-audio" = {
+                "default.clock.rate" = 44100;
+                "default.clock.allowed-rates" = [ 44100 48000 88200 96000 176400 192000 ];
+                "default.clock.quantum" = 512;
+                "default.clock.min-quantum" = 512;
+                "default.clock.max-quantum" = 512;
+            };
             extraConfig.pipewire."92-low-latency" = {
                 "context.properties" = {
                     "default.clock.rate" = 44100;
                     "default.clock.allowed-rates" = [ 44100 48000 88200 96000 176400 192000 ];
-                    "default.clock.quantum" = 1024;
-                    "default.clock.min-quantum" = 1024;
-                    "default.clock.max-quantum" = 1024;
+                    "default.clock.quantum" = 512;
+                    "default.clock.min-quantum" = 512;
+                    "default.clock.max-quantum" = 512;
                 };
             };
         };

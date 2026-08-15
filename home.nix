@@ -90,6 +90,7 @@
     };
 
     programs.onlyoffice.enable = true;
+    programs.quickshell.enable = true;
     programs.eww.enable = true;
     programs.swayimg.enable = true;
     programs.firefox = {
@@ -192,11 +193,8 @@
         nautilus    # file browser
         thunar
         fuzzel      # file picker like rofi
-        slurp
-        grim
-        satty
         wl-clipboard
-        jq
+        jq          # command line JSON processor
         sioyek
         drawy
         anki
@@ -204,6 +202,9 @@
         abcde       # cd ripper
         fractal     # matrix client
         goldendict-ng
+        yt-dlp
+        ffmpeg
+        cliamp
         (pkgs.writeShellApplication
          {
              name = "ns";
