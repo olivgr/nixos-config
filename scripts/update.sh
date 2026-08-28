@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 cd ~/nixos
 # get the latest packages
 nix flake update

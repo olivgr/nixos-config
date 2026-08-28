@@ -9,7 +9,7 @@
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.timeout = 2;
+    boot.loader.timeout = 3;
 
     boot.kernelModules = [
         "i2c-dev"
@@ -24,8 +24,8 @@
     }; 
 
     services.sunshine = {
-        enable = true;
-        autoStart = true;
+        enable = false;
+        autoStart = false;
         capSysAdmin = true;
         openFirewall = true;
     };
@@ -44,6 +44,7 @@
     };
 
     services.pulseaudio.enable = false;
+    security.polkit.enable = true;
     security.rtkit.enable = true;			# needed for realtime audio with pipewire
         services.pipewire = {
             enable = true;
@@ -100,6 +101,10 @@
     };
 
     # Needed for scripts/toggle-colorscheme.sh to work for gtk apps like thunar and mousepad:
+    #environment.pathsToLink = [ 
+        #"/share/applications"
+        #"/share/xdg-desktop-portal" 
+    #];
     environment.sessionVariables.XDG_DATA_DIRS = [
       "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
       "${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}"
@@ -134,26 +139,42 @@
         services.udisks2.enable = true;
 
 
-    services.displayManager.autoLogin = {
+    services.displayManager = {
+
+        autoLogin = {
+            enable = true;
+            user = "oliver";
+        };
+
+        defaultSession = "hyprland-uwsm";
+
+        sddm = {
+            enable = true;
+            wayland.enable = true;
+        };
+    };
+    #services.getty = {
+    #    autologinUser = "oliver";
+    #    autologinOnce = true;
+    #};
+
+    #environment.loginShellInit = ''
+    #    [[ "$(tty)" == /dev/tty1 ]] && sway
+    #'';
+
+    programs.hyprland = {
         enable = true;
-        user = "oliver";
+        withUWSM = true;
+        xwayland.enable = true;
     };
 
-    #services.desktopManager.plasma6.enable = true;
-    #services.displayManager.defaultSession = "plasma";
-    services.displayManager.sddm.enable = true;
-    #programs.hyprland = {
-    #enable = true;
-    #withUWSM = true;
-    #xwayland.enable = true;
+
+    #programs.niri = {
+        #enable = true;
     #};
-    programs.niri = {
-        enable = true;
-    };
 
     programs.gnome-disks.enable = true;
 
-    services.displayManager.sddm.wayland.enable = true;
 
     #services.xserver = {
     #enable = true;
