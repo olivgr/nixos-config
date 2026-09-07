@@ -1,0 +1,14 @@
+#!/bin/sh
+
+choice=$(printf '%s\n' "Shutdown" "Reboot" | rofi -dmenu \
+    -no-custom \
+    -theme ~/.config/rofi/power.rasi)
+
+case "$choice" in
+    Shutdown)
+        ~/nixos/scripts/xfce/shutdown
+        ;;
+    Reboot)
+        ~/nixos/scripts/xfce/reboot
+        ;;
+esac

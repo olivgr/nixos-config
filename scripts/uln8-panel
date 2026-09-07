@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if pactl list short sinks | grep -qi 'uln-8'; then
+    echo '<txt><span foreground="#4CAF50">ULN-8</span></txt>'
+    #echo '<txt>ULN-8</txt>'
+    echo '<tool>Open audio controls</tool>'
+    echo '<txtclick>pavucontrol</txtclick>'
+else
+    echo '<txt></txt>'
+fi

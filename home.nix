@@ -9,6 +9,8 @@
 
     dconf.enable = true;
 
+    programs.neovide.enable = true;
+
     programs.git = {
         enable = true;
         settings = {
@@ -25,14 +27,14 @@
         enable = true;
 
         extraPortals = with pkgs; [
-            xdg-desktop-portal-hyprland
+            #xdg-desktop-portal-hyprland
             xdg-desktop-portal-gtk
         ];
 
         config.common.default = "gtk";
-        config.hyprland = {
-            default = "hyprland;gtk";
-        };
+        #config.hyprland = {
+            #default = "hyprland;gtk";
+        #};
     };
 
     programs.bash = {
@@ -60,10 +62,10 @@
                     '';
 
     };
-    wayland.windowManager.hyprland.systemd = {
-        enable = true;
-        variables = [ "--all" ];
-    };
+    #wayland.windowManager.hyprland.systemd = {
+        #enable = true;
+        #variables = [ "--all" ];
+    #};
     #wayland.windowManager.sway = {
     #    enable = true;
     #    systemd.enable = true;
@@ -191,9 +193,9 @@
     };
 
     programs.onlyoffice.enable = true;
-    programs.quickshell.enable = true;
+    #programs.quickshell.enable = true;
     programs.eww.enable = true;
-    programs.swayimg.enable = true;
+    #programs.swayimg.enable = true;
     programs.firefox = {
         enable = true;
         #nativeMessagingHosts = [
@@ -208,21 +210,21 @@
     };
 
 
-    services.hypridle = {
-        enable = true;
-        settings = {
-            general = {
-                ignore_dbus_inhibit =false;
-            };
-            listener = [
-                {
-                    timeout = 300;
-                    on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })' '';
-                    on-resume = ''hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })' '';
-                }
-            ];
-        };
-    };
+    #services.hypridle = {
+        #enable = true;
+        #settings = {
+            #general = {
+                #ignore_dbus_inhibit =false;
+            #};
+            #listener = [
+                #{
+                    #timeout = 300;
+                    #on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })' '';
+                    #on-resume = ''hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })' '';
+                ##}
+            #];
+        #};
+    #};
 
     # Notifications
     services.mako = {
@@ -304,6 +306,7 @@
         reaper
 #        xwayland-satellite # for reaper in niri
         mousepad    # notepad like
+        xfce4-genmon-plugin
         gedit
         vlc
         darktable
@@ -313,6 +316,7 @@
         nautilus    # file browser
 #        thunar
         fuzzel      # file picker like rofi
+        rofi
         wl-clipboard
         jq          # command line JSON processor
         sioyek
@@ -326,7 +330,9 @@
         ffmpeg
         dua         # disk usage analyzer
         cliamp
+        imv
         pulseaudio  # to get pactl
+        pipewire-control-center
         woeusb-ng
 #        opencode
         (pkgs.writeShellApplication

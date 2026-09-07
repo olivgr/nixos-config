@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+engine="$(fcitx5-remote -n 2>/dev/null)"
+
+case "$engine" in
+    mozc)
+        label="あ"
+        tooltip="Japanese - Mozc"
+        ;;
+    *)
+        label="A"
+        tooltip="English"
+        ;;
+esac
+
+cat <<EOF
+<txt>$label</txt>
+<tool>$tooltip</tool>
+<txtclick>fcitx5-remote -t</txtclick>
+EOF

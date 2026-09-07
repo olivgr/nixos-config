@@ -43,7 +43,7 @@
 		<keybind key="W-P">
       <description>Open Projects</description>
 			<action name="Execute">
-        <command>pcmanfm ~/Projects</command>
+        <command>nautilus ~/Projects</command>
 			</action>
 		</keybind>
 		<keybind key="F12">
@@ -67,7 +67,7 @@
 		<keybind key="W-E">
       <description>Open file browser</description>
 			<action name="Execute">
-				<command>pcmanfm</command>
+				<command>nautilus</command>
 			</action>
 		</keybind>
 		<keybind key="W-N">

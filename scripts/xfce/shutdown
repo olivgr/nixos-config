@@ -1,0 +1,6 @@
+#!/bin/sh
+
+~/nixos/scripts/xfce/power-message "Shutting down ..." &
+wineserver -k
+sleep 1
+systemctl poweroff

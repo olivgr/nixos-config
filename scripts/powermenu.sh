@@ -14,7 +14,7 @@ case "$choice" in
     ghostty
     ;;
   files)
-    thunar
+    nautilus
     ;;
   browser)
     firefox

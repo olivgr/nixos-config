@@ -1,0 +1,19 @@
+#!/bin/sh
+
+rofi -e "$1" \
+    -theme-str '
+        window {
+            location: south;
+            anchor: south;
+            width: 260px;
+            y-offset: -35px;
+            padding: 12px 18px;
+            border: 1px;
+            border-radius: 8px;
+        }
+
+        textbox {
+            font: "Sans 14";
+            horizontal-align: 0.5;
+        }
+    '

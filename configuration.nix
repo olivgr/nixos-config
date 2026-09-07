@@ -91,7 +91,7 @@
         type = "fcitx5";
 
         fcitx5 = {
-            waylandFrontend = true;
+            #waylandFrontend = true;
 
             addons = with pkgs; [
                 fcitx5-mozc
@@ -101,10 +101,10 @@
     };
 
     # Needed for scripts/toggle-colorscheme.sh to work for gtk apps like thunar and mousepad:
-    #environment.pathsToLink = [ 
-        #"/share/applications"
-        #"/share/xdg-desktop-portal" 
-    #];
+    environment.pathsToLink = [ 
+        "/share/applications"
+        "/share/xdg-desktop-portal" 
+    ];
     environment.sessionVariables.XDG_DATA_DIRS = [
       "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
       "${pkgs.gtk4}/share/gsettings-schemas/${pkgs.gtk4.name}"
@@ -146,13 +146,15 @@
             user = "oliver";
         };
 
-        defaultSession = "hyprland-uwsm";
+        #defaultSession = "hyprland-uwsm";
+        defaultSession = "xfce";
 
-        sddm = {
-            enable = true;
-            wayland.enable = true;
-        };
+        #sddm = {
+            #enable = true;
+            #wayland.enable = true;
+        #};
     };
+    #services.desktopManager.gnome.enable = true;
     #services.getty = {
     #    autologinUser = "oliver";
     #    autologinOnce = true;
@@ -162,11 +164,11 @@
     #    [[ "$(tty)" == /dev/tty1 ]] && sway
     #'';
 
-    programs.hyprland = {
-        enable = true;
-        withUWSM = true;
-        xwayland.enable = true;
-    };
+    #programs.hyprland = {
+        #enable = true;
+        #withUWSM = true;
+        #xwayland.enable = true;
+    #};
 
 
     #programs.niri = {
@@ -176,25 +178,29 @@
     programs.gnome-disks.enable = true;
 
 
-    #services.xserver = {
-    #enable = true;
-    ## for 4k:
-    ##xrandr --output HDMI-A-0 --mode 3840x2160 --rate 120
-    #displayManager.sessionCommands = ''
-    #xrandr --output HDMI-A-0 --mode 1024x768 --rate 60
-    #'';
-    ## for 4k:
-    ##dpi = 168;
-    ## also change rofi dpi in openbox.rc
-    #dpi = 86;
-    #deviceSection = '' Option "TearFree" "true" '';
-    #videoDrivers = [ "amdgpu" ];
-    #xkb.layout = "jp";
-    #xkb.options = "ctrl:nocaps";
-    #autoRepeatDelay = 250;
-    #autoRepeatInterval = 30;
-    #windowManager.openbox.enable = true;
-    #};
+    services.xserver = {
+        enable = true;
+        ## for 4k:
+        ##xrandr --output HDMI-A-0 --mode 3840x2160 --rate 120
+        #displayManager.sessionCommands = ''
+        #xrandr --output HDMI-A-0 --mode 1024x768 --rate 60
+        #'';
+        ## for 4k:
+        ##dpi = 168;
+        ## also change rofi dpi in openbox.rc
+        #dpi = 86;
+        deviceSection = '' Option "TearFree" "true" '';
+        videoDrivers = [ "amdgpu" ];
+        xkb.layout = "jp";
+        xkb.options = "ctrl:nocaps";
+        autoRepeatDelay = 250;
+        autoRepeatInterval = 30;
+        desktopManager = {
+            xterm.enable = true;
+            xfce.enable = true;
+        };
+        #windowManager.openbox.enable = true;
+    };
 
     services.libinput = {
         enable = true;
