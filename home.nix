@@ -27,14 +27,14 @@
         enable = true;
 
         extraPortals = with pkgs; [
-            #xdg-desktop-portal-hyprland
+            xdg-desktop-portal-hyprland
             xdg-desktop-portal-gtk
         ];
 
         config.common.default = "gtk";
-        #config.hyprland = {
-            #default = "hyprland;gtk";
-        #};
+        config.hyprland = {
+            default = "hyprland;gtk";
+        };
     };
 
     programs.bash = {
@@ -62,10 +62,10 @@
                     '';
 
     };
-    #wayland.windowManager.hyprland.systemd = {
-        #enable = true;
-        #variables = [ "--all" ];
-    #};
+    wayland.windowManager.hyprland.systemd = {
+        enable = true;
+        variables = [ "--all" ];
+    };
     #wayland.windowManager.sway = {
     #    enable = true;
     #    systemd.enable = true;
@@ -148,7 +148,7 @@
             };
         };
     };
-
+    
     programs.alacritty = {
         enable = true;
         settings = {
@@ -193,9 +193,9 @@
     };
 
     programs.onlyoffice.enable = true;
-    #programs.quickshell.enable = true;
+    programs.quickshell.enable = true;
     programs.eww.enable = true;
-    #programs.swayimg.enable = true;
+    programs.swayimg.enable = true;
     programs.firefox = {
         enable = true;
         #nativeMessagingHosts = [
@@ -210,21 +210,21 @@
     };
 
 
-    #services.hypridle = {
-        #enable = true;
-        #settings = {
-            #general = {
-                #ignore_dbus_inhibit =false;
-            #};
-            #listener = [
-                #{
-                    #timeout = 300;
-                    #on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })' '';
-                    #on-resume = ''hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })' '';
-                ##}
-            #];
-        #};
-    #};
+    services.hypridle = {
+        enable = true;
+        settings = {
+            general = {
+                ignore_dbus_inhibit =false;
+            };
+            listener = [
+                {
+                    timeout = 300;
+                    on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })' '';
+                    on-resume = ''hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })' '';
+                }
+            ];
+        };
+    };
 
     # Notifications
     services.mako = {

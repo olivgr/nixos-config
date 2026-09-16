@@ -91,7 +91,7 @@
         type = "fcitx5";
 
         fcitx5 = {
-            #waylandFrontend = true;
+            waylandFrontend = true;
 
             addons = with pkgs; [
                 fcitx5-mozc
@@ -146,13 +146,13 @@
             user = "oliver";
         };
 
-        #defaultSession = "hyprland-uwsm";
-        defaultSession = "xfce";
+        defaultSession = "hyprland-uwsm";
+        #defaultSession = "xfce";
 
-        #sddm = {
-            #enable = true;
-            #wayland.enable = true;
-        #};
+        sddm = {
+            enable = true;
+            wayland.enable = true;
+        };
     };
     #services.desktopManager.gnome.enable = true;
     #services.getty = {
@@ -164,22 +164,17 @@
     #    [[ "$(tty)" == /dev/tty1 ]] && sway
     #'';
 
-    #programs.hyprland = {
-        #enable = true;
-        #withUWSM = true;
-        #xwayland.enable = true;
-    #};
+    programs.hyprland = {
+        enable = true;
+        withUWSM = true;
+        xwayland.enable = true;
+    };
 
-
-    #programs.niri = {
-        #enable = true;
-    #};
 
     programs.gnome-disks.enable = true;
 
-
-    services.xserver = {
-        enable = true;
+    #services.xserver = {
+        #enable = true;
         ## for 4k:
         ##xrandr --output HDMI-A-0 --mode 3840x2160 --rate 120
         #displayManager.sessionCommands = ''
@@ -189,18 +184,18 @@
         ##dpi = 168;
         ## also change rofi dpi in openbox.rc
         #dpi = 86;
-        deviceSection = '' Option "TearFree" "true" '';
-        videoDrivers = [ "amdgpu" ];
-        xkb.layout = "jp";
-        xkb.options = "ctrl:nocaps";
-        autoRepeatDelay = 250;
-        autoRepeatInterval = 30;
-        desktopManager = {
-            xterm.enable = true;
-            xfce.enable = true;
-        };
+        #deviceSection = '' Option "TearFree" "true" '';
+        #videoDrivers = [ "amdgpu" ];
+        #xkb.layout = "jp";
+        #xkb.options = "ctrl:nocaps";
+        #autoRepeatDelay = 250;
+        #autoRepeatInterval = 30;
+        #desktopManager = {
+            #xterm.enable = true;
+            #xfce.enable = true;
+        #};
         #windowManager.openbox.enable = true;
-    };
+    #};
 
     services.libinput = {
         enable = true;
