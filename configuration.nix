@@ -14,6 +14,7 @@
     boot.kernelModules = [
         "i2c-dev"
     ];
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     #boot.kernelParams = [
     #"quiet"
     #"loglevel=3"
@@ -22,6 +23,7 @@
     systemd.settings.Manager = {
         DefaultTimeoutStopSec = "15s";
     }; 
+
 
     services.sunshine = {
         enable = false;

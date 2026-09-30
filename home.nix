@@ -51,8 +51,63 @@
             upgrade = "~/nixos/scripts/upgrade.sh";
         };
         initExtra = ''
-            export PS1='\[\e[38;5;76m\]\u@\h\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
-            '';
+            #export PS1='\[\e[38;5;76m\]\u@\h\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
+            #---------------------------------------------------------------------------
+            # Prompt
+            #---------------------------------------------------------------------------
+            RED="\033[0;31m"
+            BROWN="\033[0;33m"
+            GREY="\033[0;97m"
+            GREEN="\033[0;32m"
+            BLUE="\033[0;34m"
+            PS_CLEAR="\033[0m"
+            SCREEN_ESC="\033k\033\134"
+
+            COLOR1="''${BLUE}"
+            COLOR2="''${BLUE}"
+            P="\$"
+
+            prompt_simple() {
+              unset PROMPT_COMMAND
+              PS1="\W\$(parse_git_branch) → "
+              PS2="> "
+            }
+
+            prompt_compact() {
+              unset PROMPT_COMMAND
+              PS1="''${COLOR1}''${P}''${PS_CLEAR} "
+              PS2="> "
+            }
+
+            prompt_color() {
+              PS1="''${GREEN}\W\$(parse_git_branch) → ''${GREY}"
+              PS2="\033[33;1mcontinue \033[0m\033[1m> "
+            }
+
+            parse_git_branch() {
+              local branch
+              local staged=""
+              local unstaged=""
+
+              branch=$(git symbolic-ref --short HEAD 2>/dev/null) || return 1
+
+              # Staged changes: index differs from HEAD
+              if ! git diff --cached --quiet 2>/dev/null; then
+                staged="+"
+              fi
+
+              # Unstaged changes: working tree differs from index
+              if ! git diff --quiet 2>/dev/null; then
+                unstaged="!"
+              fi
+                    
+              printf ' %s%s%s' "$branch" "$staged" "$unstaged"
+            }
+
+            test -n "$PS1" &&
+            prompt_color
+        '';
+
         bashrcExtra = ''
             if [[ -n "$SSH_CONNECTION" ]]; then 
                 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
@@ -210,6 +265,7 @@
     };
 
 
+
     services.hypridle = {
         enable = true;
         settings = {
@@ -298,6 +354,8 @@
         apple-cursor
         pavucontrol
         wlsunset
+        grim
+        imagemagick
         #sway
         swaybg      # wallpaper
         hyprpicker  # color-picker
@@ -333,7 +391,9 @@
         imv
         pulseaudio  # to get pactl
         pipewire-control-center
+        showtime
         woeusb-ng
+        mullvad-browser
 #        opencode
         (pkgs.writeShellApplication
          {
