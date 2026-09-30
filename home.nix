@@ -40,6 +40,7 @@
     programs.bash = {
         enable = true;
         shellAliases = {
+            gs = "git status";
             ls = "eza";
             ll = "eza -l --header --git";
             la = "eza -la --header --git";
@@ -51,7 +52,7 @@
             upgrade = "~/nixos/scripts/upgrade.sh";
         };
         initExtra = ''
-            #export PS1='\[\e[38;5;76m\]\u@\h\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
+            #export PS1='\[\e[34m\]\h \[\e[38;5;76m\]\u@\h\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
             #---------------------------------------------------------------------------
             # Prompt
             #---------------------------------------------------------------------------
@@ -80,7 +81,7 @@
             }
 
             prompt_color() {
-              PS1="''${GREEN}\W\$(parse_git_branch) → ''${GREY}"
+              PS1="''${BLUE}\h ''${GREEN}\W\$(parse_git_branch) → ''${GREY}"
               PS2="\033[33;1mcontinue \033[0m\033[1m> "
             }
 

@@ -26,8 +26,8 @@
 
 
     services.sunshine = {
-        enable = false;
-        autoStart = false;
+        enable = true;
+        autoStart = true;
         capSysAdmin = true;
         openFirewall = true;
     };
@@ -78,8 +78,23 @@
             };
         };
 
-    networking.hostName = "amp"; # Define your hostname.
+    networking.hostName = "nixos"; # Define your hostname.
     networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    networking.networkmanager.ensureProfiles.profiles."direct-ethernet" = {
+        connection = {
+            id = "direct-ethernet";
+            type = "ethernet";
+            interface-name = "enp3s0";
+        };
+
+        ipv4 = {
+            method = "manual";
+            address = "192.168.10.42";
+        };
+
+        ipv6.method = "disabled";
+    };
+
     networking.networkmanager.enable = true;
     networking.firewall.enable = true;
     hardware.bluetooth.enable = true;
@@ -133,7 +148,20 @@
 
     environment.systemPackages = with pkgs; [
         vim 
+        ethtool
     ];
+
+    systemd.services.disable-ethernet-ee = {
+        description = "Disable Ethernet Energy Efficient Ethernet";
+        after = [ "network-pre.target" ];
+        wants = [ "network-pre.target" ];
+
+        serviceConfig = {
+            Type = "oneshot";
+            ExecStart = "${pkgs.ethtool}/bin/ethtool --set-eee enp3s0 eee off";
+            RemainAfterExit = true;
+        };
+    };
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
