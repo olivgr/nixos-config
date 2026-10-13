@@ -25,6 +25,7 @@
     }; 
 
 
+
     services.sunshine = {
         enable = true;
         autoStart = true;
@@ -58,6 +59,24 @@
             wireplumber.extraConfig = {
                 "10-default-volume" = {
                     "wireplumber.settings"."device.routes.default-sink-volume" = 0.99;
+                };
+
+                # this fixes the delay when starting vlc in wine. fix: we keep the output sink running
+                "51--uln8-no-suspend" = {
+                    "monitor.alsa.rules" = [
+                        {
+                            matches = [
+                                {
+                                    "node.name" = "alsa_output.usb-Metric_Halo_ULN-8_47202_8x8-00.pro-output-0";
+                                }
+                            ];
+                            actions = {
+                                "update-props" = {
+                                    "session.suspend-timeout-seconds" = 0;
+                                };
+                            };
+                        }
+                    ];
                 };
             };
             extraConfig.pipewire."10-audio" = {
@@ -98,6 +117,7 @@
     networking.networkmanager.enable = true;
     networking.firewall.enable = true;
     hardware.bluetooth.enable = true;
+    hardware.logitech.wireless.enable = true;
     hardware.graphics.enable = true;
     hardware.i2c.enable = true;
 
@@ -176,7 +196,8 @@
             user = "oliver";
         };
 
-        defaultSession = "hyprland-uwsm";
+        #defaultSession = "hyprland-uwsm";
+        defaultSession = "mango";
         #defaultSession = "xfce";
 
         sddm = {
@@ -194,11 +215,14 @@
     #    [[ "$(tty)" == /dev/tty1 ]] && sway
     #'';
 
-    programs.hyprland = {
-        enable = true;
-        withUWSM = true;
-        xwayland.enable = true;
-    };
+    programs.mango.enable = true;
+
+
+    #programs.hyprland = {
+    #    enable = true;
+    #    withUWSM = true;
+    #    xwayland.enable = true;
+    #};
 
 
     programs.gnome-disks.enable = true;

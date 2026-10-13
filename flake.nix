@@ -1,16 +1,22 @@
 {
 	description = "My NixOS flake";
 
+
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        mango = {
+            url = "github:mangowm/mango";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
 		home-manager = {
 			url = "github:nix-community/home-manager"; #/release-26.05";
 			inputs.nixpkgs.follows = "nixpkgs";
+
 		};
 	};
 
-	outputs = { self, nixpkgs, home-manager, ... }:
+	outputs = { self, nixpkgs, mango, home-manager, ... }:
 	{
 		nixosConfigurations.nixos =
 			nixpkgs.lib.nixosSystem {

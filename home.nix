@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+ { config, pkgs, ... }:
 
 {
+
     home.username = "oliver";
     home.homeDirectory = "/home/oliver";
     home.stateVersion = "26.05";
@@ -11,6 +12,13 @@
 
     programs.neovide.enable = true;
 
+    programs.lazygit.enable = true;
+
+    # for automatically activating nix-shell on directory enter
+    programs.direnv= {
+        enable = true;
+        nix-direnv.enable = true;
+    };
     programs.git = {
         enable = true;
         settings = {
@@ -81,8 +89,8 @@
             }
 
             prompt_color() {
-              PS1="''${BLUE}\h ''${GREEN}\W\$(parse_git_branch) → ''${GREY}"
-              PS2="\033[33;1mcontinue \033[0m\033[1m> "
+              PS1="\[\e[0;34m\]\h \[\e[0;32m\]\W\$(parse_git_branch) → \[\e[0;97m\]"
+              PS2="\[\e[33;1m\]continue \[\e[0m\]\[\e[1m\]> "
             }
 
             parse_git_branch() {
@@ -107,6 +115,8 @@
 
             test -n "$PS1" &&
             prompt_color
+
+            eval "$(direnv hook bash)"
         '';
 
         bashrcExtra = ''
@@ -196,6 +206,7 @@
     #    systemd.variables = ["--all"];
     #};
 
+
     programs.foot = {
         enable = true;
         settings = {
@@ -264,8 +275,6 @@
             #Browser.UpdateBinaryPath = false;
         #};
     };
-
-
 
     services.hypridle = {
         enable = true;
@@ -346,16 +355,20 @@
         xev
         pipewire.jack
         ripgrep
+        geany
         glfw
         #clang
         zig
-        wineWow64Packages.staging
+        wev
+        #wineWow64Packages.staging
         colloid-icon-theme
         colloid-gtk-theme
         apple-cursor
         pavucontrol
         wlsunset
         grim
+        slurp
+        satty
         imagemagick
         #sway
         swaybg      # wallpaper
@@ -382,6 +395,8 @@
         drawy
         pinta
         anki
+        #solaar
+        openlogi
         abcde       # cd ripper
 #        fractal     # matrix client
         goldendict-ng
@@ -395,6 +410,8 @@
         showtime
         woeusb-ng
         mullvad-browser
+        wayvnc
+        wineWow64Packages.stable
 #        opencode
         (pkgs.writeShellApplication
          {
