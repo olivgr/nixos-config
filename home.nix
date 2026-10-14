@@ -212,6 +212,7 @@
         settings = {
             main = {
                 font = "monospace:size=12";
+                include = "~/.config/foot/themes/catppuccin-macchiato.ini";
             };
         };
     };
@@ -291,6 +292,7 @@
             ];
         };
     };
+
 
     # Notifications
     services.mako = {
@@ -379,6 +381,7 @@
 #        xwayland-satellite # for reaper in niri
         mousepad    # notepad like
         xfce4-genmon-plugin
+        xrdb
         gedit
         vlc
         darktable
@@ -409,9 +412,8 @@
         pipewire-control-center
         showtime
         woeusb-ng
-        mullvad-browser
+        #mullvad-browser
         wayvnc
-        wineWow64Packages.stable
 #        opencode
         (pkgs.writeShellApplication
          {

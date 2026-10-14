@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 
+# keep all audio ouputs awake or only ULN-8
+let 
+    keepAllOutputsAwake = false;
+in
 {
     imports =
         [ 
@@ -49,53 +53,77 @@
     services.pulseaudio.enable = false;
     security.polkit.enable = true;
     security.rtkit.enable = true;			# needed for realtime audio with pipewire
-        services.pipewire = {
-            enable = true;
-            alsa.enable = true;
-            alsa.support32Bit = true;
-            jack.enable = true;
-            pulse.enable = true;
 
-            wireplumber.extraConfig = {
-                "10-default-volume" = {
-                    "wireplumber.settings"."device.routes.default-sink-volume" = 0.99;
-                };
+    services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        jack.enable = true;
+        pulse.enable = true;
 
-                # this fixes the delay when starting vlc in wine. fix: we keep the output sink running
-                "51--uln8-no-suspend" = {
-                    "monitor.alsa.rules" = [
-                        {
-                            matches = [
-                                {
-                                    "node.name" = "alsa_output.usb-Metric_Halo_ULN-8_47202_8x8-00.pro-output-0";
-                                }
-                            ];
-                            actions = {
-                                "update-props" = {
-                                    "session.suspend-timeout-seconds" = 0;
-                                };
-                            };
-                        }
+        wireplumber.extraConfig =
+        {
+            "10-default-volume" = {
+                "wireplumber.settings"."device.routes.default-sink-volume" = 0.99;
+            };
+
+# Prevent the ULN-8 output from suspending
+            "51-uln8-no-suspend" = {
+                "monitor.alsa.rules" = [
+                {
+                    matches = [
+                    {
+                        "node.name" =
+                            "alsa_output.usb-Metric_Halo_ULN-8_47202_8x8-00.pro-output-0";
+                    }
                     ];
+                    actions.update-props = {
+                        "session.suspend-timeout-seconds" = 0;
+                    };
+                }
+                ];
+            };
+        }
+        // (if keepAllOutputsAwake then {
+# Prevent all ALSA output sinks from suspending
+        "52-all-outputs-no-suspend" = {
+            "monitor.alsa.rules" = [
+            {
+                matches = [
+                {
+                    "node.name" = "~alsa_output.*";
+                }
+                ];
+                actions.update-props = {
+                    "session.suspend-timeout-seconds" = 0;
                 };
-            };
-            extraConfig.pipewire."10-audio" = {
-                "default.clock.rate" = 44100;
-                "default.clock.allowed-rates" = [ 44100 48000 88200 96000 176400 192000 ];
-                "default.clock.quantum" = 512;
-                "default.clock.min-quantum" = 512;
-                "default.clock.max-quantum" = 512;
-            };
-            extraConfig.pipewire."92-low-latency" = {
-                "context.properties" = {
-                    "default.clock.rate" = 44100;
-                    "default.clock.allowed-rates" = [ 44100 48000 88200 96000 176400 192000 ];
-                    "default.clock.quantum" = 512;
-                    "default.clock.min-quantum" = 512;
-                    "default.clock.max-quantum" = 512;
-                };
-            };
+            }
+            ];
         };
+    } else {});
+
+    extraConfig.pipewire."10-audio" = {
+        "default.clock.rate" = 44100;
+        "default.clock.allowed-rates" = [
+            44100 #48000 88200 96000 176400 192000
+        ];
+        "default.clock.quantum" = 512;
+        "default.clock.min-quantum" = 512;
+        "default.clock.max-quantum" = 512;
+    };
+
+    extraConfig.pipewire."92-low-latency" = {
+        "context.properties" = {
+            "default.clock.rate" = 44100;
+            "default.clock.allowed-rates" = [
+                44100 #48000 88200 96000 176400 192000
+            ];
+            "default.clock.quantum" = 512;
+            "default.clock.min-quantum" = 512;
+            "default.clock.max-quantum" = 512;
+        };
+    };
+    };
 
     networking.hostName = "nixos"; # Define your hostname.
     networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
