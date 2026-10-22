@@ -18,17 +18,30 @@ in
     boot.kernelModules = [
         "i2c-dev"
     ];
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    #boot.kernelPackages = pkgs.linuxPackages_latest;
     #boot.kernelParams = [
     #"quiet"
     #"loglevel=3"
     #];
+
+    musnix.enable = true;
+    musnix.kernel.realtime = true;
+    musnix.rtcqs.enable = true;
+
+    services.xserver.xkb = {
+        layout = "jp";
+        options = "ctrl:nocaps";
+    };
+
+    console.useXkbConfig = true;
 
     systemd.settings.Manager = {
         DefaultTimeoutStopSec = "15s";
     }; 
 
 
+
+    services.blueman.enable = true;
 
     services.sunshine = {
         enable = true;
@@ -105,11 +118,11 @@ in
     extraConfig.pipewire."10-audio" = {
         "default.clock.rate" = 44100;
         "default.clock.allowed-rates" = [
-            44100 #48000 88200 96000 176400 192000
+            44100 48000 88200 96000 176400 192000
         ];
-        "default.clock.quantum" = 512;
-        "default.clock.min-quantum" = 512;
-        "default.clock.max-quantum" = 512;
+        "default.clock.quantum" = 128;
+        "default.clock.min-quantum" = 64;
+        "default.clock.max-quantum" = 1024;
     };
 
     extraConfig.pipewire."92-low-latency" = {
@@ -118,8 +131,8 @@ in
             "default.clock.allowed-rates" = [
                 44100 #48000 88200 96000 176400 192000
             ];
-            "default.clock.quantum" = 512;
-            "default.clock.min-quantum" = 512;
+            "default.clock.quantum" = 64;
+            "default.clock.min-quantum" = 32;
             "default.clock.max-quantum" = 512;
         };
     };
@@ -144,7 +157,10 @@ in
 
     networking.networkmanager.enable = true;
     networking.firewall.enable = true;
-    hardware.bluetooth.enable = true;
+    hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+    };
     hardware.logitech.wireless.enable = true;
     hardware.graphics.enable = true;
     hardware.i2c.enable = true;
@@ -159,7 +175,7 @@ in
             waylandFrontend = true;
 
             addons = with pkgs; [
-                fcitx5-mozc
+                #fcitx5-mozc
                 fcitx5-gtk
             ];
         };
@@ -179,17 +195,21 @@ in
     users.users."oliver" = {
         isNormalUser = true;
         description = "Oliver Grimm";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "audio"];
         packages = with pkgs; [
         ];
     };
 
     fonts.packages = with pkgs; [
+        aporetic
         inter-nerdfont
-            nerd-fonts.jetbrains-mono
-            nerd-fonts.noto
-            noto-fonts-cjk-sans
-            noto-fonts-cjk-serif
+        nerd-fonts.jetbrains-mono
+        nerd-fonts.noto
+        nerd-fonts.adwaita-mono
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
+        maple-mono.NF
+        commit-mono
     ];
 
     nixpkgs.config.allowUnfree = true;
@@ -244,6 +264,7 @@ in
     #'';
 
     programs.mango.enable = true;
+
 
 
     #programs.hyprland = {

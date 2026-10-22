@@ -1,4 +1,4 @@
- { config, pkgs, ... }:
+ { config, pkgs, lib, ... }:
 
 {
 
@@ -26,6 +26,7 @@
                 name = "Oliver Grimm";
                 email = "olivergrimm@fastmail.fm";
             };
+            init.defaultBranch = "main";
             alias = {
                 lg = "log --oneline --graph";
             };
@@ -128,84 +129,6 @@
                     '';
 
     };
-    wayland.windowManager.hyprland.systemd = {
-        enable = true;
-        variables = [ "--all" ];
-    };
-    #wayland.windowManager.sway = {
-    #    enable = true;
-    #    systemd.enable = true;
-    #    config = {
-    #        bars = [];
-    #    };
-
-    #    extraConfig = ''
-    #        input "type:keyboard" {
-    #            xkb_layout jp
-    #            xkb_options ctrl:nocaps
-    #            repeat_delay 270
-    #            repeat_rate 50
-    #        } 
-    #        input "type:pointer" {
-    #            natural_scroll enabled
-    #         }
-
-    #        default_border normal 2
-
-    #        set $mod Mod4
-    #        floating_modifier $mod normal
-    #        bindsym $mod+1 workspace number 1
-    #        bindsym $mod+2 workspace number 2
-    #        bindsym $mod+3 workspace number 3
-    #        bindsym $mod+4 workspace number 4
-    #        bindsym $mod+5 workspace number 5
-
-    #        # Move windows to workspace
-    #        bindsym $mod+Shift+1 move container to workspace number 1
-    #        bindsym $mod+Shift+2 move container to workspace number 2
-    #        bindsym $mod+Shift+3 move container to workspace number 3
-    #        bindsym $mod+Shift+4 move container to workspace number 4
-    #        bindsym $mod+Shift+5 move container to workspace number 5
-
-    #        # Focus windows
-    #        bindsym $mod+h focus left
-    #        bindsym $mod+j focus down
-    #        bindsym $mod+k focus up
-    #        bindsym $mod+l focus right
-
-    #        bindsym $mod+w kill
-    #        bindsym $mod+f fullscreen toggle
-    #        bindsym $mod+v floating toggle
-
-    #        bindsym $mod+Shift+c reload
-    #        bindsym $mod+Space exec ~/nixos/scripts/powermenu.sh
-    #        bindsym $mod+Return exec ghostty
-    #        bindsym $mod+e exec nautilus
-    #        bindsym $mod+Shift+Return exec firefox
-    #        bindsym $mod+y exec pw-jack reaper
-    #        bindsym $mod+Shift+a exec anki
-    #        bindsym $mod+n exec mousepad
-
-    #        for_window [class="notepad.exe"] floating enable, focus
-    #        for_window [class="vlc.exe"] floating enable, focus
-    #        for_window [app_id="firefox"] border none
-    #        for_window [app_id="org.xfce.mousepad"] floating enable, focus, border normal
-    #        for_window [app_id="com.mitchellh.ghostty"] border pixel 0
-    #        for_window [window_type="dialog"] floating enable
-
-    #        exec quickshell -c ~/.config/quickshell/bar
-    #        exec mako
-    #        exec fcitx5 -d
-    #        exec swaybg -i /home/oliver/Pictures/GR4/entrance.jpg -m fill
-    #    '';
-    #};
-
-    #wayland.windowManager.sway = {
-    #    enable = true;
-    #    wrapperFeatures.gtk = true; # Fixes common issues with GTK 3 apps
-    #    systemd.variables = ["--all"];
-    #};
-
 
     programs.foot = {
         enable = true;
@@ -232,32 +155,15 @@
         };
     };
 
-    programs.ghostty = {
-        enable = true;
-        settings = {
-            #theme = "light:Catppuccin Latte,dark:Catppuccin Mocha";
-            theme = "light:Catppuccin Latte, dark:Carbonfox";
-            #theme = "Dark Pastel";
-            font-size = 12;
-            font-feature = [
-                "-liga"
-                "-calt"
-                "-dlig"
-            ];
-            keybind = [
-                "ctrl+shift+;=increase_font_size:1"
-            ];
-            window-decoration = "none";
-            resize-overlay = "never";
-        };
-    };
+    programs.ghostty.enable = true;
 
     programs.fd.enable = true;
     programs.fzf = {
         enable = true;
+        #enableNushellIntegration = false;
         defaultCommand = "fd --type f";
-        fileWidget.command = "fd --type f";
-        changeDirWidget.command = "fd --type d";
+        fileWidgetCommand = "fd --type f";
+        changeDirWidgetCommand = "fd --type d";
     };
 
     programs.onlyoffice.enable = true;
@@ -277,22 +183,25 @@
         #};
     };
 
-    services.hypridle = {
-        enable = true;
-        settings = {
-            general = {
-                ignore_dbus_inhibit =false;
-            };
-            listener = [
-                {
-                    timeout = 300;
-                    on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({ action = "disable" })' '';
-                    on-resume = ''hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })' '';
-                }
-            ];
-        };
-    };
 
+#    services.swayidle = {
+#        enable = true;
+#        timeouts = [
+#            {
+#                timeout = 180;
+#                command = "/run/current-system/sw/bin/mmsg dispatch sleep_monitor,HDMI-A-1";
+#                resumeCommand = "/run/current-system/sw/bin/mmsg dispatch wakeup_monitor,HDMI-A-1";
+#            }
+#        ];
+#    };
+#
+#    systemd.user.services.swayidle = {
+#        Unit = {
+#            After = lib.mkForce [ ];
+#            PartOf = lib.mkForce [ ];
+#        };
+#        Install.WantedBy = lib.mkForce [ "default.target" ];
+#    };
 
     # Notifications
     services.mako = {
@@ -342,78 +251,72 @@
         x11.enable = true;
         package = pkgs.apple-cursor;
         name = "macOS";
-        size = 24;
+        size = 22;
     };
 
     home.packages = with pkgs; [
-        fastfetch
-        dconf
-        glib
-        gnome-themes-extra
-        btop
-        eza         # ls replacement
-        wget
-        nvd         # show package diffs
-        xev
-        pipewire.jack
-        ripgrep
-        geany
-        glfw
-        #clang
-        zig
-        wev
-        #wineWow64Packages.staging
-        colloid-icon-theme
-        colloid-gtk-theme
-        apple-cursor
-        pavucontrol
-        wlsunset
-        grim
-        slurp
-        satty
-        imagemagick
-        #sway
-        swaybg      # wallpaper
-        hyprpicker  # color-picker
-        hyprpaper
-#        brightnessctl
-        reaper
-#        xwayland-satellite # for reaper in niri
-        mousepad    # notepad like
-        xfce4-genmon-plugin
-        xrdb
-        gedit
-        vlc
-        darktable
-        libnotify   # needed for notifications
         neovim
-        neovim-remote
-        nautilus    # file browser
-#        thunar
-        fuzzel      # file picker like rofi
-        rofi
-        wl-clipboard
-        jq          # command line JSON processor
-        sioyek
-        drawy
-        pinta
-        anki
-        #solaar
-        openlogi
-        abcde       # cd ripper
-#        fractal     # matrix client
-        goldendict-ng
-        yt-dlp
-        ffmpeg
-        dua         # disk usage analyzer
-        cliamp
-        imv
-        pulseaudio  # to get pactl
-        pipewire-control-center
-        showtime
-        woeusb-ng
-        #mullvad-browser
-        wayvnc
+        fastfetch                   # System information display
+        dconf                       # GNOME settings database
+        glib                        # Core GNOME libraries and utilities
+        nerd-fonts.iosevka-term     # Iosevka Term Nerd Font
+        nerd-fonts.iosevka          # Iosevka Nerd Font
+        gnome-themes-extra          # Additional GTK themes
+        btop                        # Interactive system resource monitor
+        eza                         # Modern ls replacement
+        #wget                        # Download files from URLs
+        nvd                         # Show Nix package version diffs
+        #xev                         # Inspect X11 keyboard and mouse events
+        pipewire.jack               # JACK audio compatibility for PipeWire
+        ripgrep                     # Fast recursive text search
+        #geany                       # Lightweight graphical text editor
+        #clang                      # C/C++ compiler toolchain
+        #zig                         # Zig programming language and compiler
+        #wev                         # Inspect Wayland keyboard events
+        colloid-icon-theme          # Colloid desktop icon theme
+        colloid-gtk-theme           # Colloid GTK theme
+        apple-cursor                # macOS-style mouse cursor theme
+        pavucontrol                 # GUI audio mixer and device selector
+        wlsunset                    # Adjust screen color temperature by time
+        grim                        # Take Wayland screenshots
+        slurp                       # Select screen regions on Wayland
+        satty                       # Annotate screenshots
+        swaybg                      # Set desktop wallpaper
+        swayidle
+        #hyprpicker                  # Pick colors from the screen
+        reaper                      # Digital audio workstation
+        mousepad                    # Lightweight graphical text editor
+        #xrdb                        # Manage X11 resource settings
+        gedit                       # Graphical text editor
+        vlc                         # Multimedia player
+        libnotify                   # Desktop notification library and tools
+        neovim-remote               # Control Neovim from other processes
+        nautilus                    # GNOME file manager
+        #thunar                      # File manager
+        fuzzel                      # Wayland application launcher
+        rofi                        # Application launcher and menu
+        wl-clipboard                # Wayland clipboard utilities
+        #jq                          # Command-line JSON processor
+        sioyek                      # PDF reader for technical documents
+        #drawy                       # Drawing and annotation tool
+        #pinta                       # Simple raster image editor
+        #anki                        # Flashcard-based learning application
+        #openlogi                    # Logitech device configuration utility
+        #abcde                       # Rip audio CDs to digital files
+        #goldendict-ng               # Dictionary lookup application
+        #yt-dlp                      # Download video and audio from websites
+        #ffmpeg                      # Audio and video conversion tools
+        #dua                         # Interactive disk usage analyzer
+        #cliamp                      # Command-line audio player
+        imv                         # Lightweight image viewer
+        pulseaudio                  # Provides pactl audio control utility
+        #pipewire-control-center     # GUI for PipeWire audio settings
+        #woeusb-ng                   # Create Windows installation USB drives
+        #mullvad-browser            # Privacy-focused web browser
+        wayvnc                      # VNC server for wlroots Wayland compositors
+        wineWow64Packages.staging
+        wine64Packages.fonts         
+        #wdisplays                   # Configuring displays for Wayland compositors
 #        opencode
         (pkgs.writeShellApplication
          {
