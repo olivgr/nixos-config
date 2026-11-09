@@ -1,4 +1,11 @@
- { config, pkgs, lib, ... }:
+ { config, pkgs, nixpkgs-unstable, ... }:
+
+ let 
+    unstable = import nixpkgs-unstable {
+        system = pkgs.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+    };
+    in
 
 {
 
@@ -144,7 +151,7 @@
         enable = true;
         settings = {
             font.size = 13.0;
-            window.decorations = "none";
+            #window.decorations = "none";
             #window.opacity = 0.8;
 
             keyboard.bindings = [
@@ -255,6 +262,7 @@
     };
 
     home.packages = with pkgs; [
+        apostrophe                  # gtk+ based markdown editor
         neovim
         fastfetch                   # System information display
         dconf                       # GNOME settings database
@@ -276,6 +284,7 @@
         colloid-icon-theme          # Colloid desktop icon theme
         colloid-gtk-theme           # Colloid GTK theme
         apple-cursor                # macOS-style mouse cursor theme
+        emacs
         pavucontrol                 # GUI audio mixer and device selector
         wlsunset                    # Adjust screen color temperature by time
         grim                        # Take Wayland screenshots
@@ -314,8 +323,10 @@
         #woeusb-ng                   # Create Windows installation USB drives
         #mullvad-browser            # Privacy-focused web browser
         wayvnc                      # VNC server for wlroots Wayland compositors
-        wineWow64Packages.staging
+        wineWow64Packages.stable
         wine64Packages.fonts         
+        xclip
+        xrandr
         #wdisplays                   # Configuring displays for Wayland compositors
 #        opencode
         (pkgs.writeShellApplication

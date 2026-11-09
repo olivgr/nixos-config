@@ -18,15 +18,15 @@ in
     boot.kernelModules = [
         "i2c-dev"
     ];
-    #boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
     #boot.kernelParams = [
     #"quiet"
     #"loglevel=3"
     #];
 
-    musnix.enable = true;
-    musnix.kernel.realtime = true;
-    musnix.rtcqs.enable = true;
+    #musnix.enable = true;
+    #musnix.kernel.realtime = true;
+    #musnix.rtcqs.enable = true;
 
     services.xserver.xkb = {
         layout = "jp";
@@ -45,7 +45,7 @@ in
 
     services.sunshine = {
         enable = true;
-        autoStart = true;
+        autoStart = false;
         capSysAdmin = true;
         openFirewall = true;
     };
@@ -120,7 +120,7 @@ in
         "default.clock.allowed-rates" = [
             44100 48000 88200 96000 176400 192000
         ];
-        "default.clock.quantum" = 128;
+        "default.clock.quantum" = 512;
         "default.clock.min-quantum" = 64;
         "default.clock.max-quantum" = 1024;
     };
@@ -245,8 +245,8 @@ in
         };
 
         #defaultSession = "hyprland-uwsm";
-        defaultSession = "mango";
-        #defaultSession = "xfce";
+        #defaultSession = "mango";
+        defaultSession = "none+icewm";
 
         sddm = {
             enable = true;
@@ -263,7 +263,8 @@ in
     #    [[ "$(tty)" == /dev/tty1 ]] && sway
     #'';
 
-    programs.mango.enable = true;
+    #programs.mango.enable = true;
+    #programs.dms-shell.enable = true;
 
 
 
@@ -276,8 +277,8 @@ in
 
     programs.gnome-disks.enable = true;
 
-    #services.xserver = {
-        #enable = true;
+    services.xserver = {
+        enable = true;
         ## for 4k:
         ##xrandr --output HDMI-A-0 --mode 3840x2160 --rate 120
         #displayManager.sessionCommands = ''
@@ -288,17 +289,18 @@ in
         ## also change rofi dpi in openbox.rc
         #dpi = 86;
         #deviceSection = '' Option "TearFree" "true" '';
-        #videoDrivers = [ "amdgpu" ];
+        videoDrivers = [ "amdgpu" ];
         #xkb.layout = "jp";
         #xkb.options = "ctrl:nocaps";
-        #autoRepeatDelay = 250;
-        #autoRepeatInterval = 30;
+        autoRepeatDelay = 250;
+        autoRepeatInterval = 30;
         #desktopManager = {
             #xterm.enable = true;
             #xfce.enable = true;
         #};
         #windowManager.openbox.enable = true;
-    #};
+        windowManager.icewm.enable = true;
+    };
 
     services.libinput = {
         enable = true;
